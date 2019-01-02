@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="565fb9d9-84a7-4cd2-bfbe-176388051aa3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/document/o2o实体关联.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/document/o2o实体说明.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Area.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/HeadLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/LocalAuth.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/ProductCategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/ProductImg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Shop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/ShopCategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/WeChatAuth.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/utils/Gender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hust/o2o/utils/RoleType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/dao/AppointmentDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/dao/BookDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/dao/BookrecordDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/dao/CategoryDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/dao/RegisterDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/dao/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/dto/AppointExecution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/dto/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/dto/UserExcution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/entity/Appointment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/entity/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/entity/Bookrecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/entity/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/entity/Register.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/entity/SendMail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/enums/AppointStateEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/enums/UserStateEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/exception/AlreadyUsed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/exception/AppointException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/exception/NoNumberException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/exception/RepeatAppointException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/service/BookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/service/BookrecordService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/service/impl/BookServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/service/impl/BookrecordServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/service/impl/UserServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/trash/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/trash/AddressDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/trash/AddressDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/trash/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/trash/ProductDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/trash/ProductDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/trash/ShopCarDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/trash/Shopcar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/trash/ShopcarDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/util/ScheduledTaskConfigure.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/util/SendMail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/util/Servlet1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/web/BookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/java/com/soecode/lyf/web/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/jdbc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/mapper/AppointmentDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/mapper/BookDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/mapper/Bookrecord.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/mapper/CategoryDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/mapper/RegisterDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/mapper/UserDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/mybatis-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/spring/spring-dao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/spring/spring-service.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/resources/spring/spring-web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/sql/schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/jsp/common/bootstrap.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/jsp/common/head.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/jsp/common/tag.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/aopalliance-1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/c3p0-0.9.1.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/commons-collections-3.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/commons-logging-1.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/commons-pool2-2.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/hamcrest-core-1.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/jackson-annotations-2.5.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/jackson-core-2.5.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/jackson-databind-2.5.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/javax.servlet-api-3.1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/jedis-2.7.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/jstl-1.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/junit-4.11.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/logback-classic-1.1.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/logback-core-1.1.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/mybatis-3.3.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/mybatis-spring-1.2.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/mysql-connector-java-5.1.37.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/protostuff-api-1.0.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/protostuff-collectionschema-1.0.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/protostuff-core-1.0.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/protostuff-runtime-1.0.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/slf4j-api-1.7.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/spring-aop-4.1.7.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/spring-beans-4.1.7.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/spring-context-4.1.7.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/spring-core-4.1.7.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/spring-expression-4.1.7.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/spring-jdbc-4.1.7.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/spring-test-4.1.7.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/spring-tx-4.1.7.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/spring-web-4.1.7.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/spring-webmvc-4.1.7.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/lib/standard-1.1.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ssm-master/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../toutiao-micro/account-service/src/main/java/com/hust/account/config/DataSourceProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../toutiao-micro/account-service/src/main/java/com/hust/account/config/DruidDataSourceConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../toutiao-micro/common-service/src/main/java/com/hust/commonservice/bean/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sort.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/cst/wyz/algorithm/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/cst/wyz/algorithm/List/MyList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/cst/wyz/algorithm/List/SequenceList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/test/java/cst/wyz/algorithm/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/test/java/cst/wyz/algorithm/SequenceListTest.java" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1951931943">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="28" />
+          <entry key="png" value="2" />
+          <entry key="sql" value="1" />
+          <entry key="xml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Image" value="2" />
+          <entry key="JAVA" value="28" />
+          <entry key="SQL" value="1" />
+          <entry key="XML" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="3144" />
+          <entry key="xml" value="19" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="3144" />
+          <entry key="XML" value="19" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/sql/o2o_init.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="113">
+              <caret line="105" column="37" selection-start-line="105" selection-start-column="37" selection-end-line="105" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Area.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/utils/RoleType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/utils/Gender.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/WeChatAuth.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Person.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/HeadLine.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/ShopCategory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Shop.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/ProductCategory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/ProductImg.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/LocalAuth.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Product.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/sql/o2o_init.sql" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../OpenSource/apache-maven-3.5.2" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="o2o" type="b2602c69:ProjectViewProjectNode" />
+              <item name="o2o" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="o2o" type="b2602c69:ProjectViewProjectNode" />
+              <item name="o2o" type="462c0819:PsiDirectoryNode" />
+              <item name="document" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="o2o" type="b2602c69:ProjectViewProjectNode" />
+              <item name="o2o" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="o2o" type="b2602c69:ProjectViewProjectNode" />
+              <item name="o2o" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="o2o" type="b2602c69:ProjectViewProjectNode" />
+              <item name="o2o" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546405251899" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/document" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="565fb9d9-84a7-4cd2-bfbe-176388051aa3" name="Default Changelist" comment="" />
+      <created>1545964966633</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1545964966633</updated>
+      <workItem from="1545964967917" duration="4088000" />
+      <workItem from="1546397277466" duration="2490000" />
+      <workItem from="1546405018037" duration="201000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="6779000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Web" order="2" side_tool="true" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Designer" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32957748" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/utils/RoleType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/utils/Gender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/model/HeadLine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1908">
+          <caret line="106" column="16" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="16" />
+          <folding>
+            <element signature="e#484#485#0" expanded="true" />
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#555#556#0" expanded="true" />
+            <element signature="e#591#592#0" expanded="true" />
+            <element signature="e#671#672#0" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
+            <element signature="e#750#751#0" expanded="true" />
+            <element signature="e#790#791#0" expanded="true" />
+            <element signature="e#870#871#0" expanded="true" />
+            <element signature="e#901#902#0" expanded="true" />
+            <element signature="e#949#950#0" expanded="true" />
+            <element signature="e#989#990#0" expanded="true" />
+            <element signature="e#1068#1069#0" expanded="true" />
+            <element signature="e#1098#1099#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="e#1182#1183#0" expanded="true" />
+            <element signature="e#1265#1266#0" expanded="true" />
+            <element signature="e#1296#1297#0" expanded="true" />
+            <element signature="e#1345#1346#0" expanded="true" />
+            <element signature="e#1385#1386#0" expanded="true" />
+            <element signature="e#1469#1470#0" expanded="true" />
+            <element signature="e#1504#1505#0" expanded="true" />
+            <element signature="e#1561#1562#0" expanded="true" />
+            <element signature="e#1609#1610#0" expanded="true" />
+            <element signature="e#1690#1691#0" expanded="true" />
+            <element signature="e#1723#1724#0" expanded="true" />
+            <element signature="e#1773#1774#0" expanded="true" />
+            <element signature="e#1817#1818#0" expanded="true" />
+            <element signature="e#1896#1897#0" expanded="true" />
+            <element signature="e#1929#1930#0" expanded="true" />
+            <element signature="e#1979#1980#0" expanded="true" />
+            <element signature="e#2023#2024#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/model/ShopCategory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/model/ProductCategory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1206">
+          <caret line="67" column="13" selection-start-line="67" selection-start-column="13" selection-end-line="67" selection-end-column="13" />
+          <folding>
+            <element signature="e#437#438#0" expanded="true" />
+            <element signature="e#477#478#0" expanded="true" />
+            <element signature="e#541#542#0" expanded="true" />
+            <element signature="e#599#600#0" expanded="true" />
+            <element signature="e#678#679#0" expanded="true" />
+            <element signature="e#707#708#0" expanded="true" />
+            <element signature="e#749#750#0" expanded="true" />
+            <element signature="e#785#786#0" expanded="true" />
+            <element signature="e#880#881#0" expanded="true" />
+            <element signature="e#922#923#0" expanded="true" />
+            <element signature="e#992#993#0" expanded="true" />
+            <element signature="e#1054#1055#0" expanded="true" />
+            <element signature="e#1135#1136#0" expanded="true" />
+            <element signature="e#1166#1167#0" expanded="true" />
+            <element signature="e#1215#1216#0" expanded="true" />
+            <element signature="e#1255#1256#0" expanded="true" />
+            <element signature="e#1337#1338#0" expanded="true" />
+            <element signature="e#1370#1371#0" expanded="true" />
+            <element signature="e#1420#1421#0" expanded="true" />
+            <element signature="e#1464#1465#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/model/ProductImg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="80" column="16" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
+          <folding>
+            <element signature="e#850#851#0" expanded="true" />
+            <element signature="e#880#881#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/model/WeChatAuth.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/model/LocalAuth.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+          <folding>
+            <element signature="e#500#501#0" expanded="true" />
+            <element signature="e#546#547#0" expanded="true" />
+            <element signature="e#1378#1379#0" expanded="true" />
+            <element signature="e#1411#1412#0" expanded="true" />
+            <element signature="e#1461#1462#0" expanded="true" />
+            <element signature="e#1505#1506#0" expanded="true" />
+            <element signature="e#1233#1234#0" expanded="true" />
+            <element signature="e#1262#1263#0" expanded="true" />
+            <element signature="e#1306#1307#0" expanded="true" />
+            <element signature="e#1342#1343#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Shop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="189" column="14" selection-start-line="189" selection-start-column="14" selection-end-line="189" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1611">
+          <caret line="174" column="15" selection-start-line="174" selection-start-column="15" selection-end-line="174" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#712#713#0" expanded="true" />
+            <element signature="e#744#745#0" expanded="true" />
+            <element signature="e#792#793#0" expanded="true" />
+            <element signature="e#834#835#0" expanded="true" />
+            <element signature="e#872#873#0" expanded="true" />
+            <element signature="e#906#907#0" expanded="true" />
+            <element signature="e#960#961#0" expanded="true" />
+            <element signature="e#1006#1007#0" expanded="true" />
+            <element signature="e#1135#1136#0" expanded="true" />
+            <element signature="e#1169#1170#0" expanded="true" />
+            <element signature="e#1223#1224#0" expanded="true" />
+            <element signature="e#1269#1270#0" expanded="true" />
+            <element signature="e#1348#1349#0" expanded="true" />
+            <element signature="e#1378#1379#0" expanded="true" />
+            <element signature="e#1424#1425#0" expanded="true" />
+            <element signature="e#1462#1463#0" expanded="true" />
+            <element signature="e#1549#1550#0" expanded="true" />
+            <element signature="e#1583#1584#0" expanded="true" />
+            <element signature="e#1637#1638#0" expanded="true" />
+            <element signature="e#1683#1684#0" expanded="true" />
+            <element signature="e#1770#1771#0" expanded="true" />
+            <element signature="e#1807#1808#0" expanded="true" />
+            <element signature="e#1867#1868#0" expanded="true" />
+            <element signature="e#1919#1920#0" expanded="true" />
+            <element signature="e#1955#1956#0" expanded="true" />
+            <element signature="e#1986#1987#0" expanded="true" />
+            <element signature="e#2035#2036#0" expanded="true" />
+            <element signature="e#2075#2076#0" expanded="true" />
+            <element signature="e#2110#2111#0" expanded="true" />
+            <element signature="e#2143#2144#0" expanded="true" />
+            <element signature="e#2193#2194#0" expanded="true" />
+            <element signature="e#2237#2238#0" expanded="true" />
+            <element signature="e#2272#2273#0" expanded="true" />
+            <element signature="e#2305#2306#0" expanded="true" />
+            <element signature="e#2355#2356#0" expanded="true" />
+            <element signature="e#2399#2400#0" expanded="true" />
+            <element signature="e#2439#2440#0" expanded="true" />
+            <element signature="e#2474#2475#0" expanded="true" />
+            <element signature="e#2531#2532#0" expanded="true" />
+            <element signature="e#2579#2580#0" expanded="true" />
+            <element signature="e#2630#2631#0" expanded="true" />
+            <element signature="e#2667#2668#0" expanded="true" />
+            <element signature="e#2737#2738#0" expanded="true" />
+            <element signature="e#2789#2790#0" expanded="true" />
+            <element signature="e#2840#2841#0" expanded="true" />
+            <element signature="e#2878#2879#0" expanded="true" />
+            <element signature="e#2949#2950#0" expanded="true" />
+            <element signature="e#3003#3004#0" expanded="true" />
+            <element signature="e#3378#3379#0" expanded="true" />
+            <element signature="e#3405#3406#0" expanded="true" />
+            <element signature="e#3443#3444#0" expanded="true" />
+            <element signature="e#3475#3476#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/document/o2o实体关联.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/document/o2o实体说明.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/o2o/model/Area.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/sql/o2o_init.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="105" column="37" selection-start-line="105" selection-start-column="37" selection-end-line="105" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>o2o:war</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Web</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>o2o</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: junit:junit:4.11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
