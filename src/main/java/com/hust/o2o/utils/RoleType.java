@@ -1,12 +1,15 @@
 package com.hust.o2o.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author: wang
  * @Desciption:
  * @Date: Created in 11:12 2018/12/28
  * @Modified By:
  **/
-public enum RoleType {
+public enum RoleType implements BaseCodeEnum {
 
     CUSTOM(1,"顾客"),
     MERCHANT(2,"商家"),
@@ -14,11 +17,22 @@ public enum RoleType {
 
     private Integer typeId;
     private String typeInfo;
+//    private static Map<Integer, RoleType> roleTypeMap = new HashMap<>();
+
+//    static {
+//        for (RoleType roleType : RoleType.values()){
+//            roleTypeMap.put(roleType.getTypeId(),roleType);
+//        }
+//    }
 
     RoleType(Integer typeId, String typeInfo){
         this.typeId = typeId;
         this.typeInfo = typeInfo;
     }
+
+//    public static RoleType getEnumByKey(Integer typeId){
+//        return roleTypeMap.get(typeId);
+//    }
 
     public Integer getTypeId() {
         return typeId;
@@ -34,5 +48,10 @@ public enum RoleType {
 
     public void setTypeInfo(String typeInfo) {
         this.typeInfo = typeInfo;
+    }
+
+    @Override
+    public int code() {
+        return getTypeId();
     }
 }

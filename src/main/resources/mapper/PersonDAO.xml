@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.o2o.dao.PersonDAO">
+    <select id="list" resultType="com.hust.o2o.model.Person">
+        SELECT *
+        FROM tb_person
+        ORDER BY role_type DESC
+    </select>
+</mapper>
