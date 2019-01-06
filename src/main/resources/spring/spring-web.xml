@@ -27,6 +27,11 @@
         <property name="suffix" value=".html"/>
     </bean>
 
+    <!--multipart/form-data 处理-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
     <!-- 扫描 web 相关的bean -->
     <context:component-scan base-package="com.hust.o2o.controller"/>
 </beans>
