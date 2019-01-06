@@ -19,7 +19,7 @@ CREATE TABLE `tb_person`(
   `user_name` VARCHAR(32) DEFAULT NULL,
   `profile_img` VARCHAR(1024) DEFAULT NULL,
   `email` VARCHAR(1024) DEFAULT NULL,
-  `gender` VARCHAR(2) DEFAULT NULL,
+  `gender` INT(2) DEFAULT '1' COMMENT '1：男，2：女',
   `enable_status` INT(2) NOT NULL DEFAULT '0' COMMENT '0：禁止登陆本系统；1：允许登陆本系统',
   `role_type` int(2) NOT NULL DEFAULT '1' COMMENT '1:顾客；2：商家；3：管理员',
   `create_time` DATETIME default NULL,
@@ -138,3 +138,50 @@ CREATE TABLE `tb_product`(
   CONSTRAINT `fk_product_shop` FOREIGN KEY (`shop_id`) REFERENCES `tb_shop`(`shop_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+## 初始化区域数据表数据
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('东区', 1, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('西区', 2, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('豫园', 1, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('沁园', 3, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('天健园', 2, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('南区', 1, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('韵园', 1, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('紫崧', 1, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('百景园', 1, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('北区', 1, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('喻园', 1, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
+
+## 初始化用户信息数据表数据
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('wang', ' ', ' ', 1, 1, 3, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('zhu', ' ', ' ', 2, 1, 3, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('lei', ' ', ' ', 1, 1, 3, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('huangmenji', ' ', ' ', 1, 1, 2, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('hualaishi', ' ', ' ', 2, 1, 2, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('huangguan', ' ', ' ', 1, 1, 1, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('kfc', ' ', ' ', 1, 2, 2, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('jianhua', ' ', ' ', 1, 2, 1, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('litao', ' ', ' ', 1, 1, 1, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('wangmeng', ' ', ' ', 1, 2, 1, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('hanliu', ' ', ' ', 1, 2, 1, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('rujia', ' ', ' ', 1, 2, 1, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+INSERT INTO `o2o`.`tb_person` (`user_name`, `profile_img`, `email`, `gender`, `enable_status`, `role_type`, `create_time`, `update_time`) VALUES ('xindongfang', ' ', ' ', 1, 2, 1, '2019-01-02 06:41:10', '2019-01-02 06:41:14');
+
+
+## 初始化店铺类别数据表数据
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('美食', '名以食为天', ' ', 9, '2019-01-03 08:31:34', '2019-01-03 08:31:39', NULL);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('娱乐', '像绅士一样的玩', ' ', 8, '2019-01-03 08:31:34', '2019-01-03 08:31:39', NULL);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('酒店', '家的味道', ' ', 7, '2019-01-03 08:31:34', '2019-01-03 08:31:39', NULL);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('学习', '像狗一样的学', ' ', 6, '2019-01-03 08:31:34', '2019-01-03 08:31:39', NULL);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('中餐', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 1);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('西餐', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 1);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('火锅', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 1);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('烧烤', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 1);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('奶茶', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 1);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('KTV', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 2);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('影院', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 2);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('轰趴', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 2);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('快捷酒店', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 3);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('民宿', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 3);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('外语', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 4);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('美术', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 4);
+INSERT INTO `o2o`.`tb_shop_category` (`shop_category_name`, `shop_category_desc`, `shop_category_img`, `priority`, `create_time`, `update_time`, `parent_id`) VALUES ('音乐', '', ' ', 5, '2019-01-03 08:31:34', '2019-01-03 08:31:39', 4);
