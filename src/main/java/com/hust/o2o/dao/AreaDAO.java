@@ -18,4 +18,11 @@ public interface AreaDAO {
      */
     List<Area> list();
 
+    /**
+     * 依据区域名返回区域对象
+     * @param areaName
+     * @return
+     */
+    Area getByName(String areaName);
+
 }

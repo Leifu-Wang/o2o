@@ -18,4 +18,10 @@ public interface PersonDAO {
      */
     List<Person> list();
 
+    /**
+     * 根据用户名查找用户信息，测试用
+     * @return
+     */
+    Person getByUserName(String userName);
+
 }

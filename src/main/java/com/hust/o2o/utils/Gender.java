@@ -1,10 +1,5 @@
 package com.hust.o2o.utils;
 
-import com.sun.tools.javah.Gen;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author: wang
  * @Desciption:
@@ -17,22 +12,11 @@ public enum  Gender implements BaseCodeEnum {
 
     private Integer genderId;
     private String genderInfo;
-//    private static Map<Integer,Gender> genderMap = new HashMap<>();
-
-//    static {
-//        for (Gender gender : Gender.values()){
-//            genderMap.put(gender.genderId,gender);
-//        }
-//    }
 
     Gender(Integer genderId, String genderInfo) {
         this.genderId = genderId;
         this.genderInfo = genderInfo;
     }
-//
-//    public static Gender getEnumByKey(Integer genderId){
-//        return genderMap.get(genderId);
-//    }
 
     public Integer getGenderId() {
         return genderId;

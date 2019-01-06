@@ -8,4 +8,10 @@
         FROM tb_area
         ORDER BY priority DESC
     </select>
+
+    <select id="getByName" resultType="com.hust.o2o.model.Area">
+        SELECT *
+        FROM tb_area
+        WHERE area_name = #{areaName}
+    </select>
 </mapper>
