@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.o2o.dao.ProductDAO">
+    <sql id="table">tb_product</sql>
+    <sql id="insertFields">
+      product_name, product_desc, image_addr, normal_price, promotion_price, priority,
+      create_time, update_time, enable_status, product_category_id, shop_id
+    </sql>
+    <sql id="selectFields">
+      product_id, <include refid="insertFields"/>
+      </sql>
+
+
+    <insert id="insertProduct" parameterType="com.hust.o2o.model.Product"
+    useGeneratedKeys="true" keyProperty="productId" keyColumn="product_id">
+        INSERT INTO
+        <include refid="table"/>
+        (<include refid="insertFields"/>)
+        VALUES
+        (
+        #{productName},#{productDesc},#{imgAddr},#{normalPrice},#{promotionPrice},#{priority},
+        #{createTime},#{updateTime},#{enableStatus},#{productCategory.productCategoryId},#{shop.shopId}
+        )
+    </insert>
+
+</mapper>
