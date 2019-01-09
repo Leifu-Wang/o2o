@@ -1,6 +1,6 @@
 package com.hust.o2o.utils;
 
-import com.sun.tools.javah.Gen;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,13 @@ import java.util.Map;
  * @Modified By:
  **/
 public enum  Gender implements BaseCodeEnum {
+    /**
+     *
+     */
     MALE(1,"男"),
+    /**
+     *
+     */
     FEMALE(2,"女");
 
     private Integer genderId;

@@ -25,7 +25,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
 
     @Autowired
-    ProductCategoryDAO productCategoryDAO;
+    private ProductCategoryDAO productCategoryDAO;
 
     @Override
     public List<ProductCategory> queryProductCategory(long shopId) {
@@ -57,6 +57,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     @Override
+    @Transactional
     public ProductCategoryExecution deleteProductCategory(long productCategoryId, long shopId)
             throws ProductCategoryOperationException {
         // TODO 将此类别下的商品的商品ID设置为空
