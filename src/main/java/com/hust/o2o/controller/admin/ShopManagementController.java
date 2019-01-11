@@ -5,6 +5,9 @@ import com.hust.o2o.dto.ShopExecution;
 import com.hust.o2o.exceptions.ShopOperationException;
 import com.hust.o2o.model.Person;
 import com.hust.o2o.model.Shop;
+import com.hust.o2o.model.ShopCategory;
+import com.hust.o2o.service.AreaService;
+import com.hust.o2o.service.ShopCategoryService;
 import com.hust.o2o.service.ShopService;
 import com.hust.o2o.utils.HttpServletRequestUtil;
 import com.hust.o2o.utils.ShopStateEnum;
@@ -12,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,8 +41,19 @@ public class ShopManagementController {
 
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private AreaService areaService;
+    @Autowired
+    private ShopCategoryService shopCategoryService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+
+    @RequestMapping("/operation")
+    public String shopOperation(ModelMap modelMap){
+        modelMap.put("areaList", areaService.getAreaList());
+        modelMap.put("shopCategoryList", shopCategoryService.getShopCategoryList());
+        return "shop/shopOperation";
+    }
 
     /**
      * 店铺注册处理器。
