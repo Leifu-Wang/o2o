@@ -49,10 +49,26 @@ public class ShopManagementController {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     @RequestMapping("/operation")
-    public String shopOperation(ModelMap modelMap){
-        modelMap.put("areaList", areaService.getAreaList());
-        modelMap.put("shopCategoryList", shopCategoryService.getShopCategoryList());
+    public String shopOperation(){
+
         return "shop/shopOperation";
+    }
+
+    @RequestMapping(value = "/infoInit", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> shopInfoInit(){
+        logger.info("---Controller shop/shopInfoInit");
+        logger.info("---获取店铺注册需要的区域列表以及店铺类别列表---");
+        Map<String, Object> modelMap = new HashMap<>();
+        try{
+            modelMap.put("areaList", areaService.getAreaList());
+            modelMap.put("shopCategoryList", shopCategoryService.getShopCategoryList());
+            modelMap.put("success", true);
+        }catch (Exception e){
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
+        return modelMap;
     }
 
     /**
@@ -107,10 +123,11 @@ public class ShopManagementController {
         //2. 注册店铺
         if (shop != null && shopImg != null){
             // 模拟传参，运行环境下应从 session 中取值
-//            Person person = new Person();
-//            person.setUserId(4l);
-            Person userOnline = (Person) request.getSession().getAttribute("userOnline");
-            shop.setOwner(userOnline);
+            Person person = new Person();
+            person.setUserId(4l);
+            shop.setOwner(person);
+//            Person userOnline = (Person) request.getSession().getAttribute("userOnline");
+//            shop.setOwner(userOnline);
 
             ShopExecution se;
             try {
