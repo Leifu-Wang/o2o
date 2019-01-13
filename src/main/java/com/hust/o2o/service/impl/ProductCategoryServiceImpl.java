@@ -1,6 +1,7 @@
 package com.hust.o2o.service.impl;
 
 import com.hust.o2o.dao.ProductCategoryDAO;
+import com.hust.o2o.dao.ProductDAO;
 import com.hust.o2o.dto.ProductCategoryExecution;
 import com.hust.o2o.enums.ProductCategoryStateEnum;
 import com.hust.o2o.exceptions.ProductCategoryOperationException;
@@ -26,6 +27,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Autowired
     private ProductCategoryDAO productCategoryDAO;
+
+    @Autowired
+    private ProductDAO productDAO;
 
     @Override
     public List<ProductCategory> queryProductCategory(long shopId) {
@@ -60,19 +64,21 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Transactional
     public ProductCategoryExecution deleteProductCategory(long productCategoryId, long shopId)
             throws ProductCategoryOperationException {
-        // TODO 将此类别下的商品的商品ID设置为空
         try {
-            int effectedNum = productCategoryDAO.deleteProductCategory(productCategoryId, shopId);
-            if (effectedNum <= 0) {
+            /*先将此类别下的商品的商品ID设置为空*/
+            int updateNum = productDAO.updateProductCategoryToNull(productCategoryId);
+            if (updateNum <= 0) {
                 throw new ProductCategoryOperationException("商品类别删除失败！");
             }
-            else {
-                return new ProductCategoryExecution(ProductCategoryStateEnum.SUCCESS);
+            /*再删除商品类别*/
+            int deleteNum = productCategoryDAO.deleteProductCategory(productCategoryId, shopId);
+            if (deleteNum <= 0) {
+                throw new ProductCategoryOperationException("商品的类别更新失败！");
             }
+            return new ProductCategoryExecution(ProductCategoryStateEnum.SUCCESS);
         } catch (Exception e) {
             logger.info("deleteProductCategory error: " + e.getMessage());
             throw new ProductCategoryOperationException("deleteProductCategory error: " + e.getMessage());
-            //return new ProductCategoryExecution(ProductCategoryStateEnum.INNER_ERROR);
         }
     }
 }
