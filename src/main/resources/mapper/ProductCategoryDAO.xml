@@ -8,7 +8,7 @@
     <sql id="selectFields">product_category_id, product_category_name, priority, create_time, shop_id</sql>
 
 
-    <select id="queryProductCategory" resultType="com.hust.o2o.model.ProductCategory"
+    <select id="queryProductCategory" resultType="productCategory"
     parameterType="Long">
         SELECT
         <include refid="selectFields"/>

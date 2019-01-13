@@ -3,21 +3,48 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hust.o2o.dao.ProductDAO">
-    <sql id="table">tb_product</sql>
-    <sql id="insertFields">
-      product_name, product_desc, image_addr, normal_price, promotion_price, priority,
-      create_time, update_time, enable_status, product_category_id, shop_id
-    </sql>
-    <sql id="selectFields">
-      product_id, <include refid="insertFields"/>
-      </sql>
 
+    <!--product类和数据库表中tb_product表的完整映射-->
+    <resultMap id="productMap" type="product">
+        <id column="product_id" property="productId"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_desc" property="productDesc"/>
+        <result column="image_addr" property="imgAddr"/>
+        <result column="normal_price" property="normalPrice"/>
+        <result column="promotion_price" property="promotionPrice"/>
+        <result column="priority" property="priority"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="enable_status" property="enableStatus"/>
+        <!--对象映射-->
+        <association property="productCategory" column="product_category_id"
+                     javaType="ProductCategory">
+            <id column="product_category_id" property="productCategoryId"/>
+            <result column="product_category_name" property="productCategoryName"/>
+        </association>
+        <association property="shop" column="shop_id"
+                     javaType="Shop">
+            <id column="shop_id" property="shopId"/>
+            <result column="owner_id" property="ownerId"/>
+            <result column="shop_name" property="shopName"/>
+        </association>
+        <!--集合对象映射-->
+        <collection property="productImgList" column="product_id"
+                    ofType="ProductImg">
+            <id column="product_img_id" property="productImgId"/>
+            <result column="img_addr" property="imgAddr"/>
+            <result column="img_desc" property="imgDesc"/>
+            <result column="priority" property="priority"/>
+            <result column="create_time" property="createTime"/>
+            <result column="product_id" property="productId"/>
+        </collection>
+    </resultMap>
 
-    <insert id="insertProduct" parameterType="com.hust.o2o.model.Product"
-    useGeneratedKeys="true" keyProperty="productId" keyColumn="product_id">
+    <!--插入商品-->
+    <insert id="insertProduct" parameterType="product"
+            keyProperty="productId" keyColumn="product_id">
         INSERT INTO
-        <include refid="table"/>
-        (<include refid="insertFields"/>)
+        tb_product(product_name, product_desc, image_addr, normal_price, promotion_price, priority,
+        create_time, update_time, enable_status, product_category_id, shop_id)
         VALUES
         (
         #{productName},#{productDesc},#{imgAddr},#{normalPrice},#{promotionPrice},#{priority},
@@ -25,4 +52,128 @@
         )
     </insert>
 
+    <!--通过商品id查找商品-->
+    <select id="queryProductById" resultMap="productMap"
+            parameterType="long">
+        SELECT
+        p.product_id,
+        p.product_name,
+        p.product_desc,
+        p.image_addr,
+        p.normal_price,
+        p.promotion_price,
+        p.priority,
+        p.create_time,
+        p.update_time,
+        p.enable_status,
+        p.product_category_id,
+        p.shop_id,
+        pm.product_img_id,
+        pm.img_addr AS detail_img,
+        pm.img_desc,
+        pm.priority,
+        pm.create_time,
+        pm.product_id
+        FROM
+        tb_product AS p
+        LEFT JOIN
+        tb_product_img AS pm
+        ON
+        p.product_id = pm.product_id
+        WHERE
+        p.product_id = #{productId}
+        ORDER BY
+        pm.priority
+        DESC
+    </select>
+
+    <!--查询指定条件下商品列表并分页，可输入的条件有：商品名（模糊），商品状态，店铺id，商品类别-->
+    <select id="queryProductList" resultType="product">
+        SELECT
+        product_id,
+        product_name,
+        product_desc,
+        image_addr,
+        normal_price,
+        promotion_price,
+        priority,
+        create_time,
+        update_time,
+        enable_status,
+        product_category_id,
+        shop_id
+        FROM
+        tb_product
+        <where>
+            <if test="productCondition.shop != null and productCondition.shop.shopId != null">
+                AND shop_id = #{productCondition.shop.shopId}
+            </if>
+            <if test="productCondition.productCategory != null
+            and productCondition.productCategory.productCategoryId != null">
+                AND product_category_id = #{productCondition.productCategory.productCategoryId}
+            </if>
+            <if test="productCondition.productName != null">
+                AND product_name LIKE '%${productCondition.productName}%'
+            </if>
+            <if test="productCondition.enableStatus != null">
+                AND enable_status = #{productCondition.enableStatus}
+            </if>
+        </where>
+        ORDER BY
+        priority
+        DESC
+        LIMIT
+        #{rowIndex}, #{pageSize}
+    </select>
+
+    <!--查询指定条件下的的商品总数-->
+    <select id="queryProductCount" resultType="int">
+        SELECT COUNT(1) FROM tb_product
+        <where>
+            <if test="productCondition.shop != null and productCondition.shop.shopId != null">
+                AND shop_id = #{productCondition.shop.shopId}
+            </if>
+            <if test="productCondition.productCategory != null
+            and productCondition.productCategory.productCategoryId != null">
+                AND product_category_id = #{productCondition.productCategory.productCategoryId}
+            </if>
+            <if test="productCondition.productName != null">
+                AND product_name LIKE '%${productCondition.productName}%'
+            </if>
+            <if test="productCondition.enableStatus != null">
+                AND enable_status = #{productCondition.enableStatus}
+            </if>
+        </where>
+    </select>
+
+    <!--更新商品信息-->
+    <update id="updateProduct" parameterType="product"
+            keyProperty="product_id">
+        UPDATE
+        tb_product
+        <set>
+            <if test="productName != null">product_name = #{productName},</if>
+            <if test="productDesc != null">product_desc = #{productDesc},</if>
+            <if test="imgAddr != null">image_addr = #{imgAddr},</if>
+            <if test="normalPrice != null">normal_price = #{normalPrice},</if>
+            <if test="promotionPrice != null">promotion_price = #{promotionPrice},</if>
+            <if test="priority != null">priority = #{priority},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="enableStatus != null">enable_status= #{enableStatus},</if>
+            <if test="productCategory != null and productCategory.productCategoryId != null">
+                product_category_id = #{productCategory.productCategoryId}
+            </if>
+        </set>
+        WHERE
+        shop_id = #{shop.shopId}
+        AND
+        product_id = #{productId}
+    </update>
+
+    <delete id="deleteProduct">
+        DELETE FROM
+        tb_product
+        WHERE
+        product_id = #{productId}
+    </delete>
 </mapper>

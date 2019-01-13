@@ -71,4 +71,8 @@ public class ImageUtil {
     private static String getRandomFileName() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
+
+    public static void deleteFileOrPath(String imgAddr) {
+        new File(imgAddr).delete();
+    }
 }
