@@ -89,4 +89,21 @@ public class ImageUtil {
         }
     }
 
+    /**
+     * 删除目标文件或目标文件夹(级联删除目录下所有文件)
+     * @param filePath 相对图片存储根目录的相对路径
+     */
+    public static void deleteFileOrPath(String filePath){
+        File fileOrDir = new File(PathUtils.getImgBasePath() + filePath);
+        if (fileOrDir.exists()){
+            if (fileOrDir.isDirectory()){
+                File files[] = fileOrDir.listFiles();
+                for (File file : files){
+                    file.delete();
+                }
+            }
+            fileOrDir.delete();
+        }
+    }
+
 }

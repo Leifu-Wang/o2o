@@ -72,6 +72,47 @@ public class ShopServiceImpl implements ShopService {
         return new ShopExecution(ShopStateEnum.CHECK);
     }
 
+    @Override
+    public Shop getShopById(long shopId) {
+        logger.info("---shopService getShopById {}", shopId);
+        return shopDAO.queryById(shopId);
+    }
+
+    @Override
+    public ShopExecution modifyShop(Shop shop, InputStream shopInputStream, String fileName) {
+        logger.info("---modifyShop---");
+        // 1. 对象判空
+        if (shop == null || shop.getShopId() == null){
+            logger.info("---待修改店铺信息为空---");
+            return new ShopExecution(ShopStateEnum.NULL_SHOP);
+        }
+        try {
+            // 2. 图片流判空并更新图片
+            if (shopInputStream != null && fileName != null && !"".equals(fileName)){
+                logger.info("---更新店铺缩略图---");
+                Shop tempShop = getShopById(shop.getShopId());
+                if (tempShop != null && tempShop.getShopImg() != null){
+                    ImageUtil.deleteFileOrPath(tempShop.getShopImg());
+                }
+                addShopImg(shop, shopInputStream, fileName);
+            }
+            // 3. 更新店铺信息
+            shop.setUpdateTime(new Date());
+            logger.info("---更新店铺修改时间: {}", shop.getUpdateTime());
+            int effectedNum = shopDAO.updateShop(shop);
+            if (effectedNum <= 0){
+                logger.info("---店铺更新失败---");
+                return new ShopExecution(ShopStateEnum.INNER_ERROR);
+            }else {
+                logger.info("---店铺更新成功---");
+                return new ShopExecution(ShopStateEnum.SUCCESS);
+            }
+        }catch (Exception e){
+            logger.info("---店铺更新失败---");
+            throw new ShopOperationException("modifyShop error: " + e.getMessage());
+        }
+    }
+
     /**
      * 上传图片到本地服务器中，更新 shop 的img 属性
      * @param shop

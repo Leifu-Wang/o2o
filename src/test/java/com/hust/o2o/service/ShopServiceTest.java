@@ -6,12 +6,14 @@ import com.hust.o2o.dao.AreaDaoTest;
 import com.hust.o2o.dao.PersonDAO;
 import com.hust.o2o.dao.ShopCategoryDAO;
 import com.hust.o2o.dto.ShopExecution;
+import com.hust.o2o.exceptions.ShopOperationException;
 import com.hust.o2o.model.Area;
 import com.hust.o2o.model.Person;
 import com.hust.o2o.model.Shop;
 import com.hust.o2o.model.ShopCategory;
 import com.hust.o2o.utils.ShopStateEnum;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Date;
 
 /**
@@ -45,6 +50,19 @@ public class ShopServiceTest extends BaseTest {
     private static Logger logger = LoggerFactory.getLogger(ShopServiceTest.class.getName());
 
     @Test
+    public void testModifyShopTest() throws ShopOperationException, FileNotFoundException {
+        Shop shop = new Shop();
+        shop.setShopId(1L);
+        shop.setShopName("华莱士光谷店");
+        shop.setShopDesc("汉堡专卖店");
+        File file = new File("C:\\Users\\Public\\Pictures\\Sample Pictures\\desert.jpg");
+        InputStream is = new FileInputStream(file);
+        ShopExecution shopExecution = shopService.modifyShop(shop, is, "desert.jpg");
+        Assert.assertEquals(shopExecution.getState(), 1);
+    }
+
+    @Test
+    @Ignore
     public void addShopTest(){
         logger.info("---测试插入店铺---");
 

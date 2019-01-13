@@ -6,6 +6,7 @@ import com.hust.o2o.model.Person;
 import com.hust.o2o.model.Shop;
 import com.hust.o2o.model.ShopCategory;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,7 @@ public class ShopDaoTest extends BaseTest {
     private Logger logger = LoggerFactory.getLogger(ShopDaoTest.class.getName());
 
     @Test
+    @Ignore
     public void testInsertShop() {
         logger.info("---测试插入店铺---");
 
@@ -66,6 +68,7 @@ public class ShopDaoTest extends BaseTest {
     }
 
     @Test
+    @Ignore
     public void testUpdateShop(){
         logger.info("---测试更改店铺信息---");
 
@@ -78,6 +81,15 @@ public class ShopDaoTest extends BaseTest {
 
         int ret = shopDAO.updateShop(shop);
         Assert.assertEquals(1,ret);
+    }
+
+    @Test
+    public void testQueryShopById(){
+        logger.info("---测试通过 Id 获取店铺信息---");
+
+        Shop shop = shopDAO.queryById(1l);
+        logger.info("---获取店铺对象---{}", shop == null ? null : shop.getShopName());
+
     }
 
 }

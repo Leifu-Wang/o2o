@@ -31,5 +31,11 @@ public interface ShopDAO {
      */
     Shop getByName(String shopName);
 
+    /**
+     * 通过店铺 ID 获取店铺对象
+     * @param shopId
+     * @return
+     */
+    Shop queryById(Long shopId);
 
 }

@@ -11,6 +11,7 @@ import com.hust.o2o.service.ShopCategoryService;
 import com.hust.o2o.service.ShopService;
 import com.hust.o2o.utils.HttpServletRequestUtil;
 import com.hust.o2o.utils.ShopStateEnum;
+import com.hust.o2o.utils.VerifyCodeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,22 +50,22 @@ public class ShopManagementController {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     @RequestMapping("/operation")
-    public String shopOperation(){
+    public String shopOperation() {
 
         return "shop/shopOperation";
     }
 
     @RequestMapping(value = "/infoInit", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> shopInfoInit(){
+    public Map<String, Object> shopInfoInit() {
         logger.info("---Controller shop/shopInfoInit");
         logger.info("---获取店铺注册需要的区域列表以及店铺类别列表---");
         Map<String, Object> modelMap = new HashMap<>();
-        try{
+        try {
             modelMap.put("areaList", areaService.getAreaList());
             modelMap.put("shopCategoryList", shopCategoryService.getShopCategoryList());
             modelMap.put("success", true);
-        }catch (Exception e){
+        } catch (Exception e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.getMessage());
         }
@@ -76,6 +77,7 @@ public class ShopManagementController {
      * 1. 接收前端传参
      * 2. Service 层处理店铺添加
      * 3. 依据 Service 层的返回结果包装前端返回值
+     *
      * @param request
      * @return
      */
@@ -85,11 +87,19 @@ public class ShopManagementController {
         logger.info("---Controller shop/registerShop---");
         Map<String, Object> modelMap = new HashMap<>();
 
-        logger.debug("---register 参数名：");
-        Enumeration<String> parameters = request.getParameterNames();
-        while (parameters.hasMoreElements()){
-            logger.debug("-------------------{}", parameters.nextElement());
+        logger.info("---校验验证码---");
+        if (!VerifyCodeUtil.checkVerifyCode(request)) {
+            logger.info("---验证码错误---");
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "验证码错误");
+            return modelMap;
         }
+        logger.info("---验证码正确---");
+//        logger.debug("---register 参数名：");
+//        Enumeration<String> parameters = request.getParameterNames();
+//        while (parameters.hasMoreElements()){
+//            logger.debug("-------------------{}", parameters.nextElement());
+//        }
         //1. 接收并转化相应的参数
         String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
         logger.debug("-----前端传参：{}", shopStr);
@@ -99,7 +109,7 @@ public class ShopManagementController {
         try {
             shop = mapper.readValue(shopStr, Shop.class);
         } catch (Exception e) {
-            logger.info("---json 解析失败---{}",e.getMessage());
+            logger.info("---json 解析失败---{}", e.getMessage());
             modelMap.put("success", false);
             modelMap.put("errMsg", e.getMessage());
             return modelMap;
@@ -109,11 +119,11 @@ public class ShopManagementController {
         CommonsMultipartFile shopImg = null;
         CommonsMultipartResolver commonsMultipartResolver =
                 new CommonsMultipartResolver(request.getSession().getServletContext());
-        if (commonsMultipartResolver.isMultipart(request)){
+        if (commonsMultipartResolver.isMultipart(request)) {
             MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
             shopImg = (CommonsMultipartFile) multipartHttpServletRequest.getFile("shopImg");
             logger.info("---上传的图片名：{}", shopImg.getOriginalFilename());
-        }else {
+        } else {
             logger.info("---上传图片为空---");
             modelMap.put("success", false);
             modelMap.put("errMsg", "上传图片不能为空");
@@ -121,7 +131,7 @@ public class ShopManagementController {
         }
 
         //2. 注册店铺
-        if (shop != null && shopImg != null){
+        if (shop != null && shopImg != null) {
             // 模拟传参，运行环境下应从 session 中取值
             Person person = new Person();
             person.setUserId(4l);
@@ -132,26 +142,112 @@ public class ShopManagementController {
             ShopExecution se;
             try {
                 se = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
-                if (se.getState() == ShopStateEnum.CHECK.getState()){
+                if (se.getState() == ShopStateEnum.CHECK.getState()) {
                     modelMap.put("success", true);
-                }else {
+                } else {
                     modelMap.put("success", false);
                     modelMap.put("errMsg", se.getStateInfo());
                 }
             } catch (ShopOperationException e) {
                 modelMap.put("success", false);
                 modelMap.put("errMsg", e.getMessage());
-            }catch (IOException e){
+            } catch (IOException e) {
                 modelMap.put("success", false);
                 modelMap.put("errMsg", e.getMessage());
             }
             return modelMap;
 
-        }else {
+        } else {
             modelMap.put("success", false);
             modelMap.put("errMsg", "请输入店铺信息");
             return modelMap;
         }
+    }
+
+    @RequestMapping("/getShopInfo")
+    @ResponseBody
+    public Map<String, Object> getShopInfo(HttpServletRequest request) {
+        logger.info("---getShopInfo---");
+        Map<String, Object> modelMap = new HashMap<>();
+        Long shopId = HttpServletRequestUtil.getLong(request, "shopId");
+        logger.debug("---解析参数 shopId = {}", shopId);
+        if (shopId < -1 || shopService.getShopById(shopId) == null) {
+            logger.info("---Shop Id 无效---");
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "Shop Id 不存在");
+            return modelMap;
+        }
+        try {
+            logger.info("---获取店铺信息、区域列表、店铺类别列表---");
+            modelMap.put("shop", shopService.getShopById(shopId));
+            modelMap.put("areaList", areaService.getAreaList());
+            modelMap.put("shopCategoryList", shopCategoryService.getShopCategoryList());
+            modelMap.put("success", true);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/modifyShop", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> modifyShop(HttpServletRequest request) {
+        logger.info("---modifyShop---");
+        Map<String, Object> modelMap = new HashMap<>();
+
+        logger.info("---校验验证码---");
+        if (!VerifyCodeUtil.checkVerifyCode(request)) {
+            logger.info("---验证码错误---");
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "验证码错误");
+            return modelMap;
+        }
+        logger.info("---验证码正确---");
+        //1. 接收并转化相应的参数
+        String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
+        logger.debug("-----前端传参：{}", shopStr);
+        ObjectMapper mapper = new ObjectMapper();
+        Shop shop = null;
+
+        try {
+            shop = mapper.readValue(shopStr, Shop.class);
+        } catch (Exception e) {
+            logger.info("---json 解析失败---{}", e.getMessage());
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+            return modelMap;
+        }
+
+        //获取前端传递的文件流并进行处理
+        CommonsMultipartFile shopImg = null;
+        CommonsMultipartResolver commonsMultipartResolver =
+                new CommonsMultipartResolver(request.getSession().getServletContext());
+        if (commonsMultipartResolver.isMultipart(request)) {
+            MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+            shopImg = (CommonsMultipartFile) multipartHttpServletRequest.getFile("shopImg");
+            logger.info("---上传的图片名：{}", shopImg.getOriginalFilename());
+        }
+
+        ShopExecution se = null;
+        try {
+            se = shopService.modifyShop(shop,
+                    shopImg == null ? null : shopImg.getInputStream(),
+                    shopImg == null ? null : shopImg.getOriginalFilename());
+            if (se.getState() == ShopStateEnum.SUCCESS.getState()) {
+                modelMap.put("success", true);
+            } else {
+                modelMap.put("errMsg", se.getStateInfo());
+                modelMap.put("success", false);
+            }
+        } catch (ShopOperationException e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        } catch (IOException e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
+        return modelMap;
     }
 
 }

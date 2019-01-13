@@ -48,6 +48,11 @@ $(function () {
        var formData = new FormData();
        formData.append('shopImg', shopImg);
        formData.append('shopStr', JSON.stringify(shop));
+       var verifyCodeActual = $('#j_captcha').val();
+       if (!verifyCodeActual){
+           $.toast('请输入验证码！')
+       }
+       formData.append('verifyCodeActual', verifyCodeActual);
        $.ajax({
            url:registerShopUrl,
            type:'POST',
@@ -64,9 +69,8 @@ $(function () {
            }
        });
     });
-    
-    function changeVerifyCode() {
-        
-    }
-    
 })
+
+function changeVerifyCode(img) {
+    img.src = '../Kaptcha?' + Math.floor(Math.random() * 100);
+}
