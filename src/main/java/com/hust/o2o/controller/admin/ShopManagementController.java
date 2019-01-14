@@ -226,7 +226,9 @@ public class ShopManagementController {
         if (commonsMultipartResolver.isMultipart(request)) {
             MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
             shopImg = (CommonsMultipartFile) multipartHttpServletRequest.getFile("shopImg");
-            logger.info("---上传的图片名：{}", shopImg.getOriginalFilename());
+            if (shopImg != null){
+                logger.info("---上传的图片名：{}", shopImg.getOriginalFilename());
+            }
         }
 
         ShopExecution se = null;

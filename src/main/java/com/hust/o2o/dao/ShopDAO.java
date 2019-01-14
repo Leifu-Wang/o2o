@@ -1,6 +1,9 @@
 package com.hust.o2o.dao;
 
 import com.hust.o2o.model.Shop;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author: wang
@@ -9,6 +12,22 @@ import com.hust.o2o.model.Shop;
  * @Modified By:
  **/
 public interface ShopDAO {
+
+    /**
+     * 条件搜索获取店铺列表, 条件: 区域，类别，店铺名（模糊查询），店铺状态，持有人
+     * @param shopCondition 条件
+     * @param rowIndex 起始行
+     * @param pageSize 页面条目数目
+     * @return
+     */
+    List<Shop> queryShopList(@Param("shopCondition") Shop shopCondition, @Param("rowIndex") int rowIndex, @Param("pageSize") int pageSize);
+
+    /**
+     * 返回上述条件搜索的数据总数
+     * @param shopCondition
+     * @return
+     */
+    Integer queryShopListCount(Shop shopCondition);
 
     /**
      * 新增店铺

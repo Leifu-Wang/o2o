@@ -84,11 +84,18 @@ public class ShopDaoTest extends BaseTest {
     }
 
     @Test
+    @Ignore
     public void testQueryShopById(){
         logger.info("---测试通过 Id 获取店铺信息---");
 
         Shop shop = shopDAO.queryById(1l);
         logger.info("---获取店铺对象---{}", shop == null ? null : shop.getShopName());
+
+    }
+
+    @Test
+    public void testQueryShopList(){
+        logger.info("---测试通过条件搜索获取店铺信息---");
 
     }
 
