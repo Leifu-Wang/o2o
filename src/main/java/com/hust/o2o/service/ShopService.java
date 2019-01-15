@@ -38,4 +38,13 @@ public interface ShopService {
      * @return
      */
     public ShopExecution modifyShop(Shop shop, InputStream shopInputStream, String fileName);
+
+    /**
+     * 根据条件搜索获取店铺列表以及数据总数
+     * @param shopCondition 搜索条件
+     * @param pageIndex 页面索引 索引从 1 开始
+     * @param pageSize 页面条目
+     * @return
+     */
+    public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize);
 }

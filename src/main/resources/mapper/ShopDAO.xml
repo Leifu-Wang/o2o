@@ -133,10 +133,6 @@
         tb_shop s,
         tb_area a,
         tb_shop_category sc
-        WHERE
-        s.area_id = a.area_id
-        AND
-        sc.shop_category_id = a.shop_category_id
         <where>
             <if test="shopCondition != null and shopCondition.shopCategory != null and shopCondition.shopCategory.shopCategoryId != null">
                 AND s.shop_category_id = #{shopCondition.shopCategory.shopCategoryId}
@@ -145,15 +141,17 @@
                 AND s.area_id = #{shopCondition.area.areaId}
             </if>
             <if test="shopCondition != null and shopCondition.shopName != null">
-                AND s.shop_name LIKE '%${shopCondition.shopName}'
+                AND s.shop_name LIKE '%${shopCondition.shopName}%'
             </if>
             <if test="shopCondition != null and shopCondition.enableStatus != null">
                 AND s.enable_status = #{shopCondition.enableStatus}
             </if>
             <if test="shopCondition != null and shopCondition.owner != null and shopCondition.owner.userId != null">
-                AND s.user_id = #{shopCondition.owner.userId}
+                AND s.owner_id = #{shopCondition.owner.userId}
             </if>
         </where>
+        AND s.area_id = a.area_id
+        AND sc.shop_category_id = s.shop_category_id
         ORDER BY
         s.priority DESC
         LIMIT #{rowIndex}, #{pageSize}
@@ -161,15 +159,11 @@
 
     <select id="queryShopListCount" resultType="java.lang.Integer">
         SELECT
-        COUNT (1)
+        COUNT(1)
         FROM
         tb_shop s,
         tb_area a,
         tb_shop_category sc
-        WHERE
-        s.area_id = a.area_id
-        AND
-        sc.shop_category_id = a.shop_category_id
         <where>
             <if test="shopCondition != null and shopCondition.shopCategory != null and shopCondition.shopCategory.shopCategoryId != null">
                 AND s.shop_category_id = #{shopCondition.shopCategory.shopCategoryId}
@@ -178,14 +172,16 @@
                 AND s.area_id = #{shopCondition.area.areaId}
             </if>
             <if test="shopCondition != null and shopCondition.shopName != null">
-                AND s.shop_name LIKE '%${shopCondition.shopName}'
+                AND s.shop_name LIKE '%${shopCondition.shopName}%'
             </if>
             <if test="shopCondition != null and shopCondition.enableStatus != null">
                 AND s.enable_status = #{shopCondition.enableStatus}
             </if>
             <if test="shopCondition != null and shopCondition.owner != null and shopCondition.owner.userId != null">
-                AND s.user_id = #{shopCondition.owner.userId}
+                AND s.owner_id = #{shopCondition.owner.userId}
             </if>
         </where>
+        AND s.area_id = a.area_id
+        AND sc.shop_category_id = s.shop_category_id
     </select>
 </mapper>

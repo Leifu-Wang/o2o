@@ -5,7 +5,6 @@ import com.hust.o2o.dto.ShopExecution;
 import com.hust.o2o.exceptions.ShopOperationException;
 import com.hust.o2o.model.Person;
 import com.hust.o2o.model.Shop;
-import com.hust.o2o.model.ShopCategory;
 import com.hust.o2o.service.AreaService;
 import com.hust.o2o.service.ShopCategoryService;
 import com.hust.o2o.service.ShopService;
@@ -16,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,9 +24,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author: wang
@@ -53,6 +49,11 @@ public class ShopManagementController {
     public String shopOperation() {
 
         return "shop/shopOperation";
+    }
+
+    @RequestMapping("/list")
+    private String shopList(){
+        return "shop/shopList";
     }
 
     @RequestMapping(value = "/infoInit", method = RequestMethod.GET)
@@ -226,7 +227,7 @@ public class ShopManagementController {
         if (commonsMultipartResolver.isMultipart(request)) {
             MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
             shopImg = (CommonsMultipartFile) multipartHttpServletRequest.getFile("shopImg");
-            if (shopImg != null){
+            if (shopImg != null) {
                 logger.info("---上传的图片名：{}", shopImg.getOriginalFilename());
             }
         }
@@ -248,6 +249,65 @@ public class ShopManagementController {
         } catch (IOException e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.getMessage());
+        }
+        return modelMap;
+    }
+
+    /**
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/getShopList", method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String, Object> getShopList(HttpServletRequest request) {
+        logger.info("---getShopList---");
+        Map<String, Object> modelMap = new HashMap<>();
+        // 模拟获取当前登录人信息
+        Person owner = new Person();
+        owner.setUserId(4l);
+        int pageIndex = HttpServletRequestUtil.getInt(request, "pageIndex") == -1 ? 0 : HttpServletRequestUtil.getInt(request, "pageIndex");
+        int pageSize = HttpServletRequestUtil.getInt(request, "pageSize") == -1 ? 20 : HttpServletRequestUtil.getInt(request, "pageSize");
+//        Person owner = (Person) request.getSession().getAttribute("userOnline");
+        logger.info("---当前登录人（请求人）:{}", owner.getUserId());
+        List<Shop> shopList = new ArrayList<>();
+        try {
+            Shop shopCondition = new Shop();
+            shopCondition.setOwner(owner);
+            ShopExecution se = shopService.getShopList(shopCondition, pageIndex, pageSize);
+            modelMap.put("success", true);
+            modelMap.put("shopList", se.getShopList());
+            modelMap.put("totalCount", se.getCount());
+            modelMap.put("user", owner);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
+
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/getShopManagementInfo", method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String, Object> getShopManagementInfo(HttpServletRequest request){
+        logger.info("---getShopManagementInfo---");
+        Map<String, Object> modelMap = new HashMap<>();
+
+        long shopId = HttpServletRequestUtil.getLong(request, "shopId");
+        if (shopId <= 0){
+            Object currentShopObj = request.getSession().getAttribute("currentShop");
+            if (currentShopObj == null){
+                modelMap.put("redirect", true);
+                modelMap.put("url", "/o2o/shop/getShopList");
+            }
+            else {
+                modelMap.put("redirecr", false);
+                modelMap.put("shopId", ((Shop)currentShopObj).getShopId());
+            }
+        }else{
+            Shop currentShop = new Shop();
+            currentShop.setShopId(shopId);
+            request.getSession().setAttribute("currentShop", currentShop);
+            modelMap.put("redirect", false);
         }
         return modelMap;
     }

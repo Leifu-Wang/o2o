@@ -27,7 +27,7 @@ public interface ShopDAO {
      * @param shopCondition
      * @return
      */
-    Integer queryShopListCount(Shop shopCondition);
+    Integer queryShopListCount(@Param("shopCondition") Shop shopCondition);
 
     /**
      * 新增店铺

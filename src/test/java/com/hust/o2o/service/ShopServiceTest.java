@@ -50,6 +50,31 @@ public class ShopServiceTest extends BaseTest {
     private static Logger logger = LoggerFactory.getLogger(ShopServiceTest.class.getName());
 
     @Test
+    @Ignore
+    public void testGetShopList(){
+
+        Shop shopCondition = new Shop();
+        Person owner = new Person();
+        Area area = new Area();
+        ShopCategory shopCategory = new ShopCategory();
+
+        logger.info("---测试通过联合搜索店铺信息---");
+        shopCondition.setOwner(owner);
+        shopCondition.setArea(area);
+        shopCondition.setShopCategory(shopCategory);
+        owner.setUserId(4l);
+        area.setAreaId(1);
+        shopCategory.setShopCategoryId(7l);
+
+        logger.info("---持有人：huangmenji, Id: {}; 区域: 东区, Id: {}; 类别: 火锅, Id: {}", owner.getUserId(), area.getAreaId(), shopCategory.getShopCategoryId());
+        ShopExecution se = shopService.getShopList(shopCondition,0,1);
+        Assert.assertNotEquals(ShopStateEnum.INNER_ERROR.getState(), se.getState());
+        Assert.assertEquals(1, se.getShopList().size());
+        Assert.assertEquals(2, se.getCount());
+    }
+
+    @Test
+    @Ignore
     public void testModifyShopTest() throws ShopOperationException, FileNotFoundException {
         Shop shop = new Shop();
         shop.setShopId(1L);

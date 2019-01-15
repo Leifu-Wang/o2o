@@ -6,6 +6,7 @@ import com.hust.o2o.exceptions.ShopOperationException;
 import com.hust.o2o.model.Shop;
 import com.hust.o2o.service.ShopService;
 import com.hust.o2o.utils.ImageUtil;
+import com.hust.o2o.utils.PageUtil;
 import com.hust.o2o.utils.PathUtils;
 import com.hust.o2o.utils.ShopStateEnum;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: wang
@@ -111,6 +113,21 @@ public class ShopServiceImpl implements ShopService {
             logger.info("---店铺更新失败---");
             throw new ShopOperationException("modifyShop error: " + e.getMessage());
         }
+    }
+
+    @Override
+    public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize) {
+        int rowIndex = PageUtil.calculateRowIndex(pageIndex, pageSize);
+        List<Shop> shopList = shopDAO.queryShopList(shopCondition, rowIndex, pageSize);
+        int count = shopDAO.queryShopListCount(shopCondition);
+        ShopExecution se = new ShopExecution();
+        if (shopList != null){
+            se.setShopList(shopList);
+            se.setCount(count);
+        }else {
+            se.setState(ShopStateEnum.INNER_ERROR.getState());
+        }
+        return se;
     }
 
     /**
