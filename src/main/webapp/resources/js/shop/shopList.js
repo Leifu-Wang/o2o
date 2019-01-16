@@ -21,15 +21,34 @@ $(function () {
         })
     }
 
+    // function handleList(data) {
+    //     var html = '';
+    //     data.map(function (item, index) {
+    //         html += '<div class="row row-shop"><div class="col-40">' +
+    //             item.shopName + '</div><div class="col-40">' +
+    //             shopStatus(item.enableStatus) + '</div><div class="col-20">' +
+    //             goShopManagement(item.enableStatus, item.shopId) + '</div></div>';
+    //     })
+    //     $('.shop-wrap').html(html);
+    // }
+
+    var pattern = /\//
+
     function handleList(data) {
-        var html = '';
+        var html = '<ul>';
         data.map(function (item, index) {
-            html += '<div class="row row-shop"><div class="col-40">' +
-                item.shopName + '</div><div class="col-40">' +
-                shopStatus(item.enableStatus) + '</div><div class="col-20">' +
-                goShopManagement(item.enableStatus, item.shopId) + '</div></div>';
-        })
-        $('.shop-wrap').html(html);
+            html += '<li><a href="'+ goShopManagement(item.enableStatus, item.shopId) +'" class="item-link item-content">' +
+                '<div class="item-media"><img src="/o2o/common/getImage?imageUrl=' + item.shopImg.replace(/\\/g, '/') +
+                '" width="80"></div>' +
+                '<div class="item-inner"><div class="item-title-row"><div class="item-title">' + item.shopName +
+                '</div><div class="item-after">' + shopStatus(item.enableStatus) +
+                '</div></div><div class="item-subtitle">' + item.shopAddr +
+                '</div><div class="item-text">' + item.shopDesc +
+                '</div> </div></a></li>';
+        });
+        html += "</ul>";
+        $('.shop-list').html(html);
+
     }
 
     function shopStatus(status) {
@@ -42,11 +61,18 @@ $(function () {
         }
     }
 
+    // function goShopManagement(status, shopId) {
+    //     if (status == 1){
+    //         return '<a href="/o2o/shop/getShopManagementInfo?shopId=' + shopId + '">进入管理</a>';
+    //     }else{
+    //         return '';
+    //     }
+    // }
     function goShopManagement(status, shopId) {
         if (status == 1){
-            return '<a href="/o2o/shop/getShopManagementInfo?shopId=' + shopId + '">进入管理</a>';
+            return '/o2o/shop/management?shopId=' + shopId;
         }else{
-            return '';
+            return '#';
         }
     }
 

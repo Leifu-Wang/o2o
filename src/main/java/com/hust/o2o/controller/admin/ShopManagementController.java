@@ -52,8 +52,15 @@ public class ShopManagementController {
     }
 
     @RequestMapping("/list")
-    private String shopList(){
+    private String shopList() {
+
         return "shop/shopList";
+    }
+
+    @RequestMapping("/management")
+    private String shopManagement(){
+
+        return "shop/shopManagement";
     }
 
     @RequestMapping(value = "/infoInit", method = RequestMethod.GET)
@@ -293,11 +300,12 @@ public class ShopManagementController {
         Map<String, Object> modelMap = new HashMap<>();
 
         long shopId = HttpServletRequestUtil.getLong(request, "shopId");
+        logger.debug("---请求中解析的 Id 值：{}", shopId);
         if (shopId <= 0){
             Object currentShopObj = request.getSession().getAttribute("currentShop");
             if (currentShopObj == null){
                 modelMap.put("redirect", true);
-                modelMap.put("url", "/o2o/shop/getShopList");
+                modelMap.put("url", "/o2o/shop/list");
             }
             else {
                 modelMap.put("redirecr", false);
