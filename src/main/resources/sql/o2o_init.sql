@@ -127,7 +127,7 @@ CREATE TABLE `tb_product`(
   `image_addr` VARCHAR(128) DEFAULT '',
   `normal_price` VARCHAR(100) DEFAULT NULL ,
   `promotion_price` VARCHAR(100) DEFAULT NULL ,
-  `prioroty` INT(2) NOT NULL DEFAULT '0',
+  `priority` INT(2) NOT NULL DEFAULT '0',
   `create_time` DATETIME DEFAULT NULL ,
   `update_time` DATETIME DEFAULT NULL ,
   `enable_status` INT(2) NOT NULL DEFAULT '0',
@@ -137,6 +137,19 @@ CREATE TABLE `tb_product`(
   CONSTRAINT `fk_product_category` FOREIGN KEY (`product_category_id`) REFERENCES `tb_product_category`(`product_category_id`),
   CONSTRAINT `fk_product_shop` FOREIGN KEY (`shop_id`) REFERENCES `tb_shop`(`shop_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+USE `o2o`;
+DROP TABLE IF EXISTS `tb_product_img`;
+create table `tb_product_img`(
+  `product_img_id` INT(10) NOT NULL AUTO_INCREMENT,
+  `img_addr`       VARCHAR(128) DEFAULT '',
+  `img_desc`       VARCHAR(1024) DEFAULT NULL,
+  `priority`       INT(2) NOT NULL DEFAULT '0',
+  `create_time`    DATETIME DEFAULT NULL,
+  `product_id`     INT(10) NOT NULL,
+  PRIMARY KEY(`product_img_id`),
+    CONSTRAINT `fk_product` FOREIGN KEY (`product_id`) REFERENCES `tb_product`(`product__id`),
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 ## 初始化区域数据表数据
 INSERT INTO `o2o`.`tb_area` (`area_name`, `priority`, `create_time`, `update_time`) VALUES ('东区', 1, '2019-01-02 06:22:48', '2019-01-02 06:22:59');
