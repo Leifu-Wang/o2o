@@ -170,6 +170,15 @@
         product_id = #{productId}
     </update>
 
+    <update id="updateProductCategoryToNull" parameterType="long">
+        UPDATE
+        tb_product
+        SET
+        product_category_id = NULL
+        where
+        product_category_id = #{productCategoryId}
+    </update>
+
     <delete id="deleteProduct">
         DELETE FROM
         tb_product

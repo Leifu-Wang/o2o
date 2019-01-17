@@ -7,6 +7,7 @@ import com.hust.o2o.enums.ProductStateEnum;
 import com.hust.o2o.exceptions.ProductOperationException;
 import com.hust.o2o.model.Product;
 import com.hust.o2o.model.ProductCategory;
+import com.hust.o2o.model.ProductImg;
 import com.hust.o2o.model.Shop;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -37,15 +39,18 @@ public class ProductServiceTest extends BaseTest {
     @Autowired
     private ProductService productService;
 
+    private long shopId = 1L;
+    private long productCategoryId = 1L;
+
     @Test
     public void testAAddProduct() throws FileNotFoundException {
         // 创建shopId为1并且productCategory为1的商品实例 并赋初值
         Product product = new Product();
 
         Shop shop = new Shop();
-        shop.setShopId(1L);
+        shop.setShopId(shopId);
         ProductCategory pc = new ProductCategory();
-        pc.setProductCategoryId(1L);
+        pc.setProductCategoryId(productCategoryId);
 
         product.setShop(shop);
         product.setProductCategory(pc);
@@ -78,4 +83,37 @@ public class ProductServiceTest extends BaseTest {
         logger.info("ProductExecution state: " + pe.getState() + " stateInfo: " + pe.getStateInfo());
         Assert.assertEquals(ProductStateEnum.SUCCESS.getState(), pe.getState());
     }
+
+    @Test
+    public void testBModifyProduct() throws FileNotFoundException{
+        Product product = new Product();
+
+        Shop shop = new Shop();
+        shop.setShopId(shopId);
+        ProductCategory productCategory = new ProductCategory();
+        productCategory.setProductCategoryId(productCategoryId+1);
+
+        product.setShop(shop);
+        product.setProductId(13L);
+        product.setNormalPrice("256");
+        product.setPromotionPrice("224");
+        product.setProductCategory(productCategory);
+        product.setUpdateTime(new Date());
+        product.setProductName("测试商品1-修改");
+        product.setProductDesc("测试商品1-desc修改");
+
+        // 创建缩略图文件流
+        File thumbnailFile = new File("C:/Users/Public/Pictures/Sample Pictures/Koala.jpg");
+        InputStream is = new FileInputStream(thumbnailFile);
+        ImageHolder imageHolder = new ImageHolder(thumbnailFile.getName(), is);
+
+        // 创建商品详情图片列表
+        List<ImageHolder> productImgList = null;
+
+        ProductExecution pe = productService.modifyProduct(product, imageHolder, productImgList);
+        logger.info("ProductExecution state: " + pe.getState() + " stateInfo: " + pe.getStateInfo());
+        Assert.assertEquals(ProductStateEnum.SUCCESS.getState(), pe.getState());
+
+    }
+
 }

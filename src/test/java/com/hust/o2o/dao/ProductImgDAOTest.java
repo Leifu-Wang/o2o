@@ -3,7 +3,9 @@ package com.hust.o2o.dao;
 import com.hust.o2o.BaseTest;
 import com.hust.o2o.model.ProductImg;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,10 @@ import java.util.List;
  * @author wangleifu
  * @created 2019-01-07 20:39
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductImgDAOTest extends BaseTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
+    private long productId = 2L;
 
     @Autowired
     ProductImgDAO productImgDAO;
@@ -31,14 +35,14 @@ public class ProductImgDAOTest extends BaseTest {
         productImg1.setImgDesc("测试图片DESC1");
         productImg1.setPriority(1);
         productImg1.setCreateTime(new Date());
-        productImg1.setProductId(2L);
+        productImg1.setProductId(productId);
 
         ProductImg productImg2 = new ProductImg();
         productImg2.setImgAddr("测试图片1");
         productImg2.setImgDesc("测试图片DESC1");
         productImg2.setPriority(1);
         productImg2.setCreateTime(new Date());
-        productImg2.setProductId(2L);
+        productImg2.setProductId(productId);
 
         List<ProductImg> productImgList = new ArrayList<>();
         productImgList.add(productImg1);
@@ -47,5 +51,11 @@ public class ProductImgDAOTest extends BaseTest {
         int effectedNum = productImgDAO.batchInsertProductImg(productImgList);
         logger.info("effectedNum: " + effectedNum);
         Assert.assertEquals(productImgList.size(), effectedNum);
+    }
+
+    @Test
+    public void testCDeleteProductImgByProductId() {
+        int effectNum = productImgDAO.deleteProductImgByProductId(productId);
+        Assert.assertEquals( 2, effectNum);
     }
 }

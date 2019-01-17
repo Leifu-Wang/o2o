@@ -50,6 +50,13 @@ public interface ProductDAO {
     int updateProduct(Product product);
 
     /**
+     * 删除商品类别的时候，将该类别的商品的类别id全部置为空
+     * @param productCategoryId  指定删除的商品类别
+     * @return
+     */
+    int updateProductCategoryToNull(long productCategoryId);
+
+    /**
      * 删除商品
      * @param productId
      * @return

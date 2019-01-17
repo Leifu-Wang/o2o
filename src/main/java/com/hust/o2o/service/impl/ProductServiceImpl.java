@@ -189,7 +189,7 @@ public class ProductServiceImpl implements ProductService {
      * @param thumbnail 待添加的图片信息
      */
     private void addThumbnail(Product product, ImageHolder thumbnail) {
-        //TODO 添加商品缩略图
+        /*添加商品缩略图*/
         String dest = PathUtil.getShopImagePath(product.getShop().getShopId());
         String thumbnailAddr = ImageUtil.generateThumbnail(thumbnail, dest, 200, 200, 0.8f);
         product.setImgAddr(thumbnailAddr);
@@ -202,7 +202,7 @@ public class ProductServiceImpl implements ProductService {
      * @param productImgList  待添加的图片列表
      */
     private void addProductImgList(Product product, List<ImageHolder> productImgList) {
-        //TODO 添加商品详情图片
+        /*添加商品详情图片*/
         String dest = PathUtil.getShopImagePath(product.getShop().getShopId());
         List<ProductImg> imgList = new ArrayList<>();
         for (ImageHolder imageHolder : productImgList) {

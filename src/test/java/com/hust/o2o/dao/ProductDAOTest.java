@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 商品详情 DAO接口 测试
@@ -23,6 +24,8 @@ import java.util.Date;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductDAOTest extends BaseTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
+    private long shopId = 1L;
+    private long productCategoryId = 1L;
 
     @Autowired
     ProductDAO productDAO;
@@ -30,10 +33,10 @@ public class ProductDAOTest extends BaseTest {
     @Test
     public void testAInsertProduct() {
         Shop shop1 = new Shop();
-        shop1.setShopId(1L);
+        shop1.setShopId(shopId);
 
         ProductCategory pc = new ProductCategory();
-        pc.setProductCategoryId(1L);
+        pc.setProductCategoryId(productCategoryId);
 
 
         Product product1 = new Product();
@@ -82,6 +85,37 @@ public class ProductDAOTest extends BaseTest {
         Assert.assertEquals(1, effectedNum);
 
 
+    }
+
+    @Test
+    public void testBQueryProductListAndCount() {
+        Shop shop = new Shop();
+        shop.setShopId(shopId);
+
+        ProductCategory pc = new ProductCategory();
+        pc.setProductCategoryId(productCategoryId);
+
+
+        Product product = new Product();
+        product.setProductName("测试");
+
+        product.setEnableStatus(1);
+
+        product.setShop(shop);
+
+        product.setProductCategory(pc);
+
+        List<Product> productList = productDAO.queryProductList(product, 0, 100);
+        int count = productDAO.queryProductCount(product);
+
+        logger.info("查询商品列表数量：" + productList.size());
+        Assert.assertEquals(count, productList.size());
+    }
+
+    @Test
+    public void testCUpdateProductCategoryToNull() {
+        int effectedNum = productDAO.updateProductCategoryToNull(productCategoryId+1);
+        Assert.assertEquals(1, effectedNum);
     }
 
 }
