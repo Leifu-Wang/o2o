@@ -9,7 +9,8 @@ import java.io.File;
  * @created 2019-01-08 12:33
  */
 public class PathUtil {
-    private static String separator = System.getProperty("file.separator");
+    //private static String separator = System.getProperty("file.separator");
+    private static String separator = "/";
 
     public static String getShopImagePath(long shopId) {
         String imgPath = "upload/item/shop/" + shopId + "/";
