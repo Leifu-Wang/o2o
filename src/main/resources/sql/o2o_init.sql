@@ -148,7 +148,7 @@ create table `tb_product_img`(
   `create_time`    DATETIME DEFAULT NULL,
   `product_id`     INT(10) NOT NULL,
   PRIMARY KEY(`product_img_id`),
-    CONSTRAINT `fk_product` FOREIGN KEY (`product_id`) REFERENCES `tb_product`(`product__id`),
+    CONSTRAINT `fk_product` FOREIGN KEY (`product_id`) REFERENCES `tb_product`(`product__id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 ## 初始化区域数据表数据
