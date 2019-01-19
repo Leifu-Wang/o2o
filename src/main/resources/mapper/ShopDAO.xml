@@ -15,7 +15,7 @@
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
         <result column="enable_status" property="enableStatus"/>
-        <result column="advice" property="advive"/>
+        <result column="advice" property="advice"/>
         <association property="area" column="area_id" javaType="com.hust.o2o.model.Area">
             <id column="area_id" property="areaId"/>
             <result column="area_name" property="areaName"/>

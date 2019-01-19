@@ -1,6 +1,6 @@
 package com.hust.o2o.model;
 
-import javax.xml.crypto.Data;
+import java.util.Date;
 
 /**
  * @author: wang
@@ -14,7 +14,7 @@ public class ProductCategory {
     private Long shopId;
     private String productCategoryName;
     private Integer priority;
-    private Data createTime;
+    private Date createTime;
 
     /**
      * 获取商品类别ID
@@ -68,11 +68,11 @@ public class ProductCategory {
      * 获取创建时间
      * @return
      */
-    public Data getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Data createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 }

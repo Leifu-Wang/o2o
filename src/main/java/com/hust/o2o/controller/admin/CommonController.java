@@ -2,7 +2,6 @@ package com.hust.o2o.controller.admin;
 
 import com.hust.o2o.service.CommonService;
 import com.hust.o2o.utils.HttpServletRequestUtil;
-import com.hust.o2o.utils.ImageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,6 @@ public class CommonController {
             swapStream.write(buff, 0, rc);
         }
         byte[] img = swapStream.toByteArray();
-//        response.setContentType("image/png");
         OutputStream os = response.getOutputStream();
         os.write(img);
         os.flush();

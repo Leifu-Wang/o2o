@@ -22,6 +22,7 @@ public class VerifyCodeUtil {
      * @return
      */
     public static boolean checkVerifyCode(HttpServletRequest request) {
+        logger.info("---验证码校验工具---");
         String verifyCodeExpected = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         logger.debug("---图片代码: {}", verifyCodeExpected);
         String verifyCOdeActual = HttpServletRequestUtil.getString(request,MyContants.VERIFY_CODE_FIELD);

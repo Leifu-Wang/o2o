@@ -8,4 +8,10 @@
         FROM tb_person
         ORDER BY role_type DESC
     </select>
+
+    <select id="getByUserName" resultType="com.hust.o2o.model.Person">
+        SELECT *
+        FROM tb_person
+        WHERE user_name = #{userName}
+    </select>
 </mapper>
