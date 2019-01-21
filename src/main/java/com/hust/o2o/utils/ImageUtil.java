@@ -1,109 +1,78 @@
 package com.hust.o2o.utils;
 
+import com.hust.o2o.dto.ImageHolder;
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Position;
 import net.coobird.thumbnailator.geometry.Positions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Random;
+import java.util.RandomAccess;
+import java.util.UUID;
 
 /**
- * @author: wang
- * @Desciption: 封装图片处理工具方法
- * @Date: Created in 10:27 2019/1/4
- * @Modified By:
- **/
+ * 图片操作 工具类
+ *
+ * @author wangleifu
+ * @created 2019-01-08 11:28
+ */
 public class ImageUtil {
+    private static Logger logger = LoggerFactory.getLogger(ImageUtil.class);
 
-    private static String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-
-    private static final Random random = new Random();
-
-    private static Logger logger = LoggerFactory.getLogger(ImageUtil.class.getName());
+    private static String basePath = "";
 
     /**
-     * 存储店铺缩略图，返回缩略图相对路径
-     * @param thumbnailInputStream
+     * 添加商品缩略图，并返回存储的相对路径
+     * @param thumbnail
      * @param targetAddr
      * @return
      */
-    public static String generateThumbnail(InputStream thumbnailInputStream, String targetAddr, String fileName){
-        String realFileName = getRandomFileName();
-        logger.info("---图片的随机文件名---:{}",realFileName);
-        String extension = getFileExtension(fileName);
+    public static String generateThumbnail(ImageHolder thumbnail, String targetAddr,
+                                           int imgL, int imgW, float outputQuality) {
+        // 获取不重复的随机名
+        String imgFileName = getRandomFileName();
+        // 获取文件的扩展名，如png，jgp等
+        String extension = getFileExtension(thumbnail.getImageName());
+        // 如果目标路径不存在则自动创建
         makeDirPath(targetAddr);
-        String relativeAddr = targetAddr + realFileName + extension;
-        logger.info("---图片的相对路径---:{}",relativeAddr);
-        File dest = new File(PathUtils.getImgBasePath() + relativeAddr);
-        logger.info("---图片存储的绝对路径---:{}",dest.getAbsolutePath());
-        try{
-            Thumbnails.of(thumbnailInputStream).size(200,200)
-                    .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")),0.25f)
-                    .outputQuality(0.8f).toFile(dest);
-        }catch (IOException e){
-            e.printStackTrace();
+        // 获取文件存储的相对路径（带文件名）
+        String relativeAddr = targetAddr + imgFileName + extension;
+        // 获取文件要保存的目标路径
+        File dest = new File(PathUtil.getBasePath() + relativeAddr);
+        // 调用Thumbnails生成带有水印的图片
+
+        try {
+            Thumbnails.of(thumbnail.getImage()).size(imgL,imgW)
+                    //.watermark(Positions.BOTTOM_RIGHT,ImageIO.read(new File(basePath + "/watermark")),0.6F)
+                    .outputQuality(outputQuality).toFile(dest);
+        } catch (Exception e) {
+            logger.error("创建缩略图失败： " + e.toString());
+            throw new RuntimeException("创建缩略图失败: " + e.toString());
         }
         return relativeAddr;
     }
 
-    /**
-     * 获取随机文件名，由 时间+五位随机数组成
-     * @return
-     */
-    public static String getRandomFileName(){
-
-        //获取随机五位数
-        int randNum = random.nextInt(89999) + 10000;
-        String nowTimeStr = sdf.format(new Date());
-
-        return nowTimeStr + randNum;
-
+    private static void makeDirPath(String targetAddr) {
+        File dir = new File(targetAddr);
+        boolean hasDir = dir.mkdirs();
+        logger.info("hashDir: " + !hasDir);
     }
 
-    /**
-     * 获取输入文件流的扩展名
-     * @param fileName
-     * @return
-     */
-    public static String getFileExtension(String  fileName){
-        return fileName.substring(fileName.lastIndexOf("."));
+    private static String getFileExtension(String imageName) {
+        int index = imageName.lastIndexOf(".");
+        String extension = imageName.substring(index+1);
+        logger.info("getFileExtension: " + extension);
+        return extension;
     }
 
-    /**
-     * 创建目标路径上所涉及到的目录
-     * @param targetAddr
-     */
-    public static void makeDirPath(String targetAddr){
-        String absolutePath = PathUtils.getImgBasePath() + targetAddr;
-        File dirPath = new File(absolutePath);
-        if (!dirPath.exists()){
-            dirPath.mkdirs();
-        }
+    private static String getRandomFileName() {
+        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
-    /**
-     * 删除目标文件或目标文件夹(级联删除目录下所有文件)
-     * @param filePath 相对图片存储根目录的相对路径
-     */
-    public static void deleteFileOrPath(String filePath){
-        File fileOrDir = new File(PathUtils.getImgBasePath() + filePath);
-        if (fileOrDir.exists()){
-            if (fileOrDir.isDirectory()){
-                File files[] = fileOrDir.listFiles();
-                for (File file : files){
-                    file.delete();
-                }
-            }
-            fileOrDir.delete();
-        }
+    public static void deleteFileOrPath(String imgAddr) {
+        new File(imgAddr).delete();
     }
-
 }

@@ -15,14 +15,24 @@ public class Product {
     private String productName;
     private String productDesc;
 
+    /**
+     * 浏览 缩略图
+     */
     private String imgAddr;
     private String normalPrice;
     private String promotionPrice;
     private Integer priority;
     private Date createTime;
     private Date updateTime;
+    /**
+     * 0: 下架
+     * 1: 在前端展示系统展示
+     */
     private Integer enableStatus;
 
+    /**
+     * 点击 详情图
+     */
     private List<ProductImg> productImgList;
     private ProductCategory productCategory;
     private Shop shop;

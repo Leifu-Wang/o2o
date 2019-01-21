@@ -10,9 +10,17 @@ import java.util.Map;
  * @Modified By:
  **/
 public enum RoleType implements BaseCodeEnum {
-
+    /**
+     *
+     */
     CUSTOM(1,"顾客"),
+    /**
+     *
+     */
     MERCHANT(2,"商家"),
+    /**
+     *
+     */
     ADMIN(3,"管理员");
 
     private Integer typeId;
