@@ -3,11 +3,12 @@ $(function () {
     var addUrl = '/o2o/shop/addProductCategories';
     var deleteUrl = '/o2o/shop/removeProductCategory';
     getList();
+
     function getList() {
         $.getJSON(
             listUrl,
             function (data) {
-                if (data.success){
+                if (data.success) {
                     var dataList = data.data;
                     $('.category-wrap').html('');
                     var tempHtml = '';
@@ -28,6 +29,7 @@ $(function () {
             }
         )
     }
+
     $('#new').click(function () {
         var tempHtml = '<div class="row row-product-category temp">' +
             '<div class="col-33"><input class="category-input category" type="text" placeholder="类别名"></div>' +
@@ -48,15 +50,15 @@ $(function () {
             }
         });
         $.ajax({
-            url:addUrl,
-            type:'POST',
-            data:JSON.stringify(productCategoryList),
-            contentType:'application/json',
-            success:function (data) {
+            url: addUrl,
+            type: 'POST',
+            data: JSON.stringify(productCategoryList),
+            contentType: 'application/json',
+            success: function (data) {
                 if (data.success) {
                     $.toast('提交成功！');
                     getList();
-                }else {
+                } else {
                     $.toast('提交失败！\n' + data.errMsg);
                 }
             }
@@ -68,24 +70,24 @@ $(function () {
             console.log($(this).parent().parent());
             $(this).parent().parent().remove();
         }
-        );
+    );
 
     $('.category-wrap').on('click', '.row-product-category.now .delete',
         function (e) {
             var target = e.currentTarget;
             $.confirm('确定么?', function () {
                 $.ajax({
-                    url:deleteUrl,
-                    type:'POST',
-                    data:{
-                        productCategoryId:target.dataset.id
+                    url: deleteUrl,
+                    type: 'POST',
+                    data: {
+                        productCategoryId: target.dataset.id
                     },
-                    dataType:'json',
-                    success:function(data){
-                        if (data.success){
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.success) {
                             $.toast('删除成功!');
                             getList();
-                        }else {
+                        } else {
                             $.toast('删除失败!\n' + data.errMsg);
                         }
                     }

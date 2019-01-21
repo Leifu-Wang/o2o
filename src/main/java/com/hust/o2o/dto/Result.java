@@ -15,18 +15,20 @@ public class Result<T> {
 
     /**
      * 返回正确时的构造器
+     *
      * @param success true
-     * @param data json 数据
+     * @param data    json 数据
      */
-    public Result(boolean success, T data){
+    public Result(boolean success, T data) {
         this.success = success;
-        this.data= data;
+        this.data = data;
     }
 
     /**
      * 返回错误结果时的构造器
-     * @param success false
-     * @param errMsg 错误信息
+     *
+     * @param success   false
+     * @param errMsg    错误信息
      * @param errorCode 错误码
      */
     public Result(boolean success, String errMsg, int errorCode) {

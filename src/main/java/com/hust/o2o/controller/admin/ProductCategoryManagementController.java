@@ -1,12 +1,12 @@
 package com.hust.o2o.controller.admin;
 
 import com.hust.o2o.dto.ProductCategoryExecution;
+import com.hust.o2o.dto.Result;
 import com.hust.o2o.enums.ProductCategoryStateEnum;
 import com.hust.o2o.exceptions.ProductCategoryOperationException;
 import com.hust.o2o.model.ProductCategory;
 import com.hust.o2o.model.Shop;
 import com.hust.o2o.service.ProductCategoryService;
-import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +28,41 @@ import java.util.Map;
  * @create 2019-01-07 14:22
  */
 @Controller
-@RequestMapping("/shopadmin")
+@RequestMapping("/shop")
 public class ProductCategoryManagementController {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
 
     @Autowired
     ProductCategoryService productCategoryService;
 
-    @RequestMapping(value = "/addproductcategories", method = {RequestMethod.POST})
+    @RequestMapping("/productCategoryManagement")
+    public String productCategoryManagement() {
+        return "shop/productCategoryManagement";
+    }
+
+    @RequestMapping(value = "/getProductCategoryList", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<List<ProductCategory>> getProductCategoryList(HttpServletRequest request) {
+        // TO BE MOVED
+//        Shop shop = new Shop();
+//        shop.setShopId(10L);
+//        request.getSession().setAttribute("currentShop", shop);
+
+        Shop currentShop = (Shop) request.getSession().getAttribute("currentShop");
+        List<ProductCategory> list = null;
+        if (currentShop != null && currentShop.getShopId() > 0) {
+            list = productCategoryService.getProductCategoryList(currentShop.getShopId());
+            return new Result<List<ProductCategory>>(true, list);
+        } else {
+            ProductCategoryStateEnum ps = ProductCategoryStateEnum.INNER_ERROR;
+            return new Result<List<ProductCategory>>(false, ps.getStateInfo(), ps.getState());
+        }
+    }
+
+    @RequestMapping(value = "/addProductCategories", method = {RequestMethod.POST})
     @ResponseBody
     public Map<String, Object> addProductCategories(@RequestBody List<ProductCategory> productCategoryList,
-                                                   HttpServletRequest request) {
+                                                    HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
         Shop currentShop = (Shop) request.getSession().getAttribute("currentShop");
         for (ProductCategory productCategory : productCategoryList) {
@@ -47,11 +71,11 @@ public class ProductCategoryManagementController {
 
         if (productCategoryList.size() > 0) {
             try {
-                ProductCategoryExecution pcExecution =  productCategoryService.batchAddProductCategory(productCategoryList);
+                ProductCategoryExecution pcExecution =
+                        productCategoryService.batchAddProductCategory(productCategoryList);
                 if (pcExecution.getState() == ProductCategoryStateEnum.SUCCESS.getState()) {
                     modelMap.put("success", true);
-                }
-                else {
+                } else {
                     modelMap.put("success", false);
                     modelMap.put("errMsg", pcExecution.getStateInfo());
                 }
@@ -61,16 +85,14 @@ public class ProductCategoryManagementController {
                 modelMap.put("errMsg", e.toString());
                 return modelMap;
             }
-        }
-        else
-        {
+        } else {
             modelMap.put("success", false);
             modelMap.put("errMsg", "请至少添加一个商品类别！");
         }
         return modelMap;
     }
 
-    @RequestMapping(value = "/removeproductcategory", method = {RequestMethod.POST})
+    @RequestMapping(value = "/removeProductCategory", method = {RequestMethod.POST})
     @ResponseBody
     public Map<String, Object> removeProductCategory(Long productCategoryId, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
@@ -82,8 +104,7 @@ public class ProductCategoryManagementController {
                         productCategoryService.deleteProductCategory(productCategoryId, currentShop.getShopId());
                 if (pcExecution.getState() == ProductCategoryStateEnum.SUCCESS.getState()) {
                     modelMap.put("success", true);
-                }
-                else {
+                } else {
                     modelMap.put("success", false);
                     modelMap.put("errMsg", pcExecution.getStateInfo());
                 }
@@ -93,9 +114,7 @@ public class ProductCategoryManagementController {
                 modelMap.put("errMsg", e.toString());
                 return modelMap;
             }
-        }
-        else
-        {
+        } else {
             modelMap.put("success", false);
             modelMap.put("errMsg", "请至少选择一个商品类别！");
         }

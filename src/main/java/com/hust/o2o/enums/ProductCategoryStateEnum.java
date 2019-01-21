@@ -26,7 +26,7 @@ public enum ProductCategoryStateEnum {
     }
 
     public ProductCategoryStateEnum stateOf(int index) {
-        for(ProductCategoryStateEnum state : values()) {
+        for (ProductCategoryStateEnum state : values()) {
             if (state.getState() == index) {
                 return state;
             }

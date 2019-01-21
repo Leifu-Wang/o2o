@@ -31,4 +31,5 @@ public enum ProductStateEnum {
 
     public void setStateInfo(String stateInfo) {
         this.stateInfo = stateInfo;
-    }}
+    }
+}

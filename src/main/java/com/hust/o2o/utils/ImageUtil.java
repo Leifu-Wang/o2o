@@ -2,15 +2,10 @@ package com.hust.o2o.utils;
 
 import com.hust.o2o.dto.ImageHolder;
 import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Position;
-import net.coobird.thumbnailator.geometry.Positions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.imageio.ImageIO;
 import java.io.File;
-import java.util.Random;
-import java.util.RandomAccess;
 import java.util.UUID;
 
 /**
@@ -45,7 +40,7 @@ public class ImageUtil {
         // 调用Thumbnails生成带有水印的图片
 
         try {
-            Thumbnails.of(thumbnail.getImage()).size(imgL,imgW)
+            Thumbnails.of(thumbnail.getImage()).size(imgL, imgW)
                     //.watermark(Positions.BOTTOM_RIGHT,ImageIO.read(new File(basePath + "/watermark")),0.6F)
                     .outputQuality(outputQuality).toFile(dest);
         } catch (Exception e) {
@@ -63,7 +58,7 @@ public class ImageUtil {
 
     private static String getFileExtension(String imageName) {
         int index = imageName.lastIndexOf(".");
-        String extension = imageName.substring(index+1);
+        String extension = imageName.substring(index + 1);
         logger.info("getFileExtension: " + extension);
         return extension;
     }

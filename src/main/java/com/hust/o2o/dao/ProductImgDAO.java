@@ -14,6 +14,7 @@ public interface ProductImgDAO {
 
     /**
      * 批量插入商品缩略图
+     *
      * @param productImgList
      * @return
      */
@@ -21,6 +22,7 @@ public interface ProductImgDAO {
 
     /**
      * 删除指定商品的详情图
+     *
      * @param productId
      * @return
      */

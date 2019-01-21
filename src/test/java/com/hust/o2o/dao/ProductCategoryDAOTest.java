@@ -23,30 +23,29 @@ import java.util.List;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductCategoryDAOTest extends BaseTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
+    private Long shopId = 10L;
 
     @Autowired
     private ProductCategoryDAO productCategoryDAO;
 
     @Test
-    public void testBQueryProductCategory()
-    {
-        long shopId = 1;
+    public void testBQueryProductCategory() {
+//        long shopId = 1;
         List<ProductCategory> productCategoryList = productCategoryDAO.queryProductCategory(shopId);
         logger.info("该商铺自定义商品类别数为: " + productCategoryList.size());
     }
 
     @Test
-    public void testABatchInsertProductCategory()
-    {
+    public void testABatchInsertProductCategory() {
         ProductCategory productCategory1 = new ProductCategory();
         productCategory1.setProductCategoryName("商品类别1");
-        productCategory1.setShopId(1L);
+        productCategory1.setShopId(shopId);
         productCategory1.setPriority(1);
         productCategory1.setCreateTime(new Date());
 
         ProductCategory productCategory2 = new ProductCategory();
         productCategory2.setProductCategoryName("商品类别2");
-        productCategory2.setShopId(1L);
+        productCategory2.setShopId(shopId);
         productCategory2.setPriority(2);
         productCategory2.setCreateTime(new Date());
 
@@ -61,12 +60,13 @@ public class ProductCategoryDAOTest extends BaseTest {
 
     @Test
     public void testCDeleteProductCategory() {
-        long shopId = 1;
+//        long shopId = 1;
         List<ProductCategory> productCategoryList = productCategoryDAO.queryProductCategory(shopId);
         for (ProductCategory productCategory : productCategoryList) {
             if ("商品类别1".equals(productCategory.getProductCategoryName()) ||
                     "商品类别2".equals(productCategory.getProductCategoryName())) {
-                int effectedNum = productCategoryDAO.deleteProductCategory(productCategory.getProductCategoryId(), shopId);
+                int effectedNum = productCategoryDAO.deleteProductCategory(productCategory.getProductCategoryId(),
+                        shopId);
                 logger.info("effectedNum: " + effectedNum);
                 Assert.assertEquals(1, effectedNum);
             }

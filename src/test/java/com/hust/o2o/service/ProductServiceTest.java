@@ -4,10 +4,8 @@ import com.hust.o2o.BaseTest;
 import com.hust.o2o.dto.ImageHolder;
 import com.hust.o2o.dto.ProductExecution;
 import com.hust.o2o.enums.ProductStateEnum;
-import com.hust.o2o.exceptions.ProductOperationException;
 import com.hust.o2o.model.Product;
 import com.hust.o2o.model.ProductCategory;
-import com.hust.o2o.model.ProductImg;
 import com.hust.o2o.model.Shop;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -17,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -85,13 +82,13 @@ public class ProductServiceTest extends BaseTest {
     }
 
     @Test
-    public void testBModifyProduct() throws FileNotFoundException{
+    public void testBModifyProduct() throws FileNotFoundException {
         Product product = new Product();
 
         Shop shop = new Shop();
         shop.setShopId(shopId);
         ProductCategory productCategory = new ProductCategory();
-        productCategory.setProductCategoryId(productCategoryId+1);
+        productCategory.setProductCategoryId(productCategoryId + 1);
 
         product.setShop(shop);
         product.setProductId(13L);

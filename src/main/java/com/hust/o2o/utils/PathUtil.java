@@ -1,7 +1,5 @@
 package com.hust.o2o.utils;
 
-import java.io.File;
-
 /**
  * 存储路径 工具类
  *
@@ -23,8 +21,7 @@ public class PathUtil {
         if (os.toLowerCase().startsWith("win")) {
 
             basePath = System.getProperty("user.dir") + "/";
-        }
-        else {
+        } else {
             basePath = System.getProperty("user.dir") + "/";
             //basePath = "/Users/o2o/image";
         }

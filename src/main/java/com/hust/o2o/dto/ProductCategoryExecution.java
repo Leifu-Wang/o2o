@@ -21,6 +21,7 @@ public class ProductCategoryExecution {
 
     /**
      * 操作失败时候使用的构造器
+     *
      * @param stateEnum
      */
     public ProductCategoryExecution(ProductCategoryStateEnum stateEnum) {
@@ -30,6 +31,7 @@ public class ProductCategoryExecution {
 
     /**
      * 操作成功时候使用的构造器
+     *
      * @param stateEnum
      * @param productCategorieList
      */

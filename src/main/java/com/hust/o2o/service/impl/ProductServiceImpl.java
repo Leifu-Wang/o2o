@@ -38,9 +38,10 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 先添加商品缩略图，然后添加商品，再添加商品详情图
-     * @param product         添加到指定的商品
-     * @param thumbnail       待添加的商品缩略图
-     * @param productImgList  待添加的商品详情图列表
+     *
+     * @param product        添加到指定的商品
+     * @param thumbnail      待添加的商品缩略图
+     * @param productImgList 待添加的商品详情图列表
      * @return ProductExecution  DTO数据传输对象
      * @throws ProductOperationException 商品操作异常类型
      */
@@ -65,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
                     logger.info("商品添加失败！");
                     throw new ProductOperationException("商品添加失败！");
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 /*商品添加异常处理*/
                 logger.info("商品添加失败：" + e.toString());
                 throw new ProductOperationException("商品添加失败: " + e.toString());
@@ -75,8 +76,7 @@ public class ProductServiceImpl implements ProductService {
                 addProductImgList(product, productImgList);
             }
             return new ProductExecution(ProductStateEnum.SUCCESS);
-        }
-        else {
+        } else {
             /*传参为空则返回空值错误信息*/
             return new ProductExecution(ProductStateEnum.EMPTY);
         }
@@ -84,8 +84,9 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 通过商品id查询商品细信息
+     *
      * @param productId id
-     * @return  Product
+     * @return Product
      */
     @Override
     public Product getProductById(long productId) {
@@ -94,6 +95,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 查询指定条件下商品列表并分页，可输入的条件有：商品名（模糊），商品状态，店铺id，商品类别
+     *
      * @param product
      * @param pageIndex
      * @param pageSize
@@ -123,17 +125,21 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 获取指定条件下对应的商品总数
+     *
      * @param product
      * @return
      */
     @Override
-    public int getProductCount(Product product) { return productDAO.queryProductCount(product); }
+    public int getProductCount(Product product) {
+        return productDAO.queryProductCount(product);
+    }
 
     /**
      * 修改商品信息
-     * @param product           新的商品属性值
-     * @param thumbnail         新的缩略图信息
-     * @param productImgList    新的详情图列表
+     *
+     * @param product        新的商品属性值
+     * @param thumbnail      新的缩略图信息
+     * @param productImgList 新的详情图列表
      * @return ProductExecution DTO数据传输对象
      * @throws ProductOperationException 商品操作的异常类型
      */
@@ -158,22 +164,21 @@ public class ProductServiceImpl implements ProductService {
                 int effectedNum = productDAO.updateProduct(product);
                 if (effectedNum <= 0) {
                     throw new ProductOperationException("商品修改失败!");
-                }
-                else {
+                } else {
                     return new ProductExecution(ProductStateEnum.SUCCESS);
                 }
-            } catch(Exception e) {
-                logger.info("商品修改失败："+e.toString());
-                throw new ProductOperationException("商品修改失败: "+e.toString());
+            } catch (Exception e) {
+                logger.info("商品修改失败：" + e.toString());
+                throw new ProductOperationException("商品修改失败: " + e.toString());
             }
-        }
-        else {
+        } else {
             return new ProductExecution(ProductStateEnum.EMPTY);
         }
     }
 
     /**
      * 删除指定商品
+     *
      * @param productId
      * @return
      * @throws ProductOperationException
@@ -185,6 +190,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 添加商品缩略图
+     *
      * @param product   添加到指定的商品
      * @param thumbnail 待添加的图片信息
      */
@@ -198,8 +204,9 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 添加商品详情图片
-     * @param product         添加到指定的商品
-     * @param productImgList  待添加的图片列表
+     *
+     * @param product        添加到指定的商品
+     * @param productImgList 待添加的图片列表
      */
     private void addProductImgList(Product product, List<ImageHolder> productImgList) {
         /*添加商品详情图片*/
@@ -220,13 +227,14 @@ public class ProductServiceImpl implements ProductService {
             if (effectedNum <= 0) {
                 logger.info("添加商品详情图片失败！");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.info("添加商品详情图片失败：" + e.toString());
         }
     }
 
     /**
      * 删除指定商品的详情图列表
+     *
      * @param productId
      */
     private void deleteProductImgList(long productId) {

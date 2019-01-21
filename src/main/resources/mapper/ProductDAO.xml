@@ -42,49 +42,55 @@
     <!--插入商品-->
     <insert id="insertProduct" parameterType="product"
             keyProperty="productId" keyColumn="product_id">
-        INSERT INTO
-        tb_product(product_name, product_desc, image_addr, normal_price, promotion_price, priority,
-        create_time, update_time, enable_status, product_category_id, shop_id)
-        VALUES
-        (
-        #{productName},#{productDesc},#{imgAddr},#{normalPrice},#{promotionPrice},#{priority},
-        #{createTime},#{updateTime},#{enableStatus},#{productCategory.productCategoryId},#{shop.shopId}
-        )
+        INSERT INTO tb_product (product_name,
+                                product_desc,
+                                image_addr,
+                                normal_price,
+                                promotion_price,
+                                priority,
+                                create_time,
+                                update_time,
+                                enable_status,
+                                product_category_id,
+                                shop_id)
+        VALUES (#{productName},
+                #{productDesc},
+                #{imgAddr},
+                #{normalPrice},
+                #{promotionPrice},
+                #{priority},
+                #{createTime},
+                #{updateTime},
+                #{enableStatus},
+                #{productCategory.productCategoryId},
+                #{shop.shopId})
     </insert>
 
     <!--通过商品id查找商品-->
     <select id="queryProductById" resultMap="productMap"
             parameterType="long">
-        SELECT
-        p.product_id,
-        p.product_name,
-        p.product_desc,
-        p.image_addr,
-        p.normal_price,
-        p.promotion_price,
-        p.priority,
-        p.create_time,
-        p.update_time,
-        p.enable_status,
-        p.product_category_id,
-        p.shop_id,
-        pm.product_img_id,
-        pm.img_addr AS detail_img,
-        pm.img_desc,
-        pm.priority,
-        pm.create_time,
-        pm.product_id
-        FROM
-        tb_product AS p
-        LEFT JOIN
-        tb_product_img AS pm
-        ON
-        p.product_id = pm.product_id
-        WHERE
-        p.product_id = #{productId}
-        ORDER BY
-        pm.priority
-        DESC
+        SELECT p.product_id,
+               p.product_name,
+               p.product_desc,
+               p.image_addr,
+               p.normal_price,
+               p.promotion_price,
+               p.priority,
+               p.create_time,
+               p.update_time,
+               p.enable_status,
+               p.product_category_id,
+               p.shop_id,
+               pm.product_img_id,
+               pm.img_addr AS detail_img,
+               pm.img_desc,
+               pm.priority,
+               pm.create_time,
+               pm.product_id
+        FROM tb_product AS p
+                 LEFT JOIN tb_product_img AS pm ON p.product_id = pm.product_id
+        WHERE p.product_id = #{productId}
+        ORDER BY pm.priority DESC
     </select>
 
     <!--查询指定条件下商品列表并分页，可输入的条件有：商品名（模糊），商品状态，店铺id，商品类别-->
@@ -171,18 +177,14 @@
     </update>
 
     <update id="updateProductCategoryToNull" parameterType="long">
-        UPDATE
-        tb_product
-        SET
-        product_category_id = NULL
-        where
-        product_category_id = #{productCategoryId}
+        UPDATE tb_product
+        SET product_category_id = NULL
+        where product_category_id = #{productCategoryId}
     </update>
 
     <delete id="deleteProduct">
-        DELETE FROM
-        tb_product
-        WHERE
-        product_id = #{productId}
+        DELETE
+        FROM tb_product
+        WHERE product_id = #{productId}
     </delete>
 </mapper>

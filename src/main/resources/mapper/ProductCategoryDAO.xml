@@ -9,7 +9,7 @@
 
 
     <select id="queryProductCategory" resultType="productCategory"
-    parameterType="Long">
+            parameterType="Long">
         SELECT
         <include refid="selectFields"/>
         FROM

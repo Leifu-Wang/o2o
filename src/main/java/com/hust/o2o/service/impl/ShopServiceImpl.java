@@ -1,6 +1,7 @@
 package com.hust.o2o.service.impl;
 
 import com.hust.o2o.dao.ShopDAO;
+import com.hust.o2o.dto.ImageHolder;
 import com.hust.o2o.dto.ShopExecution;
 import com.hust.o2o.exceptions.ShopOperationException;
 import com.hust.o2o.model.Shop;
@@ -137,7 +138,8 @@ public class ShopServiceImpl implements ShopService {
     private void addShopImg(Shop shop, InputStream shopImgInputStream, String fileName) {
 
         String dest = PathUtils.getShopImagePath(shop.getShopId());
-        String shopImageAddr = ImageUtil.generateThumbnail(shopImgInputStream, dest, fileName);
+        ImageHolder imageHolder = new ImageHolder(fileName, shopImgInputStream);
+        String shopImageAddr = ImageUtil.generateThumbnail(imageHolder, dest, 20, 20, 0.75f);
         shop.setShopImg(shopImageAddr);
 
     }

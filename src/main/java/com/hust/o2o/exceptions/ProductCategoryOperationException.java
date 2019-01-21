@@ -6,7 +6,7 @@ package com.hust.o2o.exceptions;
  * @author wangleifu
  * @create 2019-01-07 15:52
  */
-public class ProductCategoryOperationException extends RuntimeException{
+public class ProductCategoryOperationException extends RuntimeException {
 
     private static final long serialVersionUID = 7884457525866548615L;
 

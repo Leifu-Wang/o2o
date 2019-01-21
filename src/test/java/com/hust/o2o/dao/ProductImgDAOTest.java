@@ -56,6 +56,6 @@ public class ProductImgDAOTest extends BaseTest {
     @Test
     public void testCDeleteProductImgByProductId() {
         int effectNum = productImgDAO.deleteProductImgByProductId(productId);
-        Assert.assertEquals( 2, effectNum);
+        Assert.assertEquals(2, effectNum);
     }
 }

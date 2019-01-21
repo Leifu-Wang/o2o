@@ -24,7 +24,7 @@ import java.util.List;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductDAOTest extends BaseTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
-    private long shopId = 1L;
+    private long shopId = 10L;
     private long productCategoryId = 1L;
 
     @Autowired
@@ -114,7 +114,7 @@ public class ProductDAOTest extends BaseTest {
 
     @Test
     public void testCUpdateProductCategoryToNull() {
-        int effectedNum = productDAO.updateProductCategoryToNull(productCategoryId+1);
+        int effectedNum = productDAO.updateProductCategoryToNull(productCategoryId + 1);
         Assert.assertEquals(1, effectedNum);
     }
 

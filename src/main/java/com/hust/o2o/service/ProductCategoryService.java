@@ -16,13 +16,15 @@ public interface ProductCategoryService {
 
     /**
      * 查询指定某个点铺下的所有商品类别信息
+     *
      * @param shopId 指定的店铺ID
      * @return List<ProductCategory>
      */
-    List<ProductCategory> queryProductCategory(long shopId);
+    List<ProductCategory> getProductCategoryList(long shopId);
 
     /**
      * 批量插入商品类别信息
+     *
      * @param productCategoryList 需要插入的商品类别信息列表
      * @return ProductCategoryExecution
      * @throws ProductCategoryOperationException
@@ -32,6 +34,7 @@ public interface ProductCategoryService {
 
     /**
      * 先将此类别下的商品的商品ID设置为空，再删除该类别
+     *
      * @param productCategoryId
      * @param shopId
      * @return ProductCategoryExecution

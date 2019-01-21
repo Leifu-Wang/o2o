@@ -28,12 +28,14 @@ public class ProductExecution {
         this.state = stateEnum.getState();
         this.stateInfo = stateEnum.getStateInfo();
     }
+
     // 成功的构造器
     public ProductExecution(ProductStateEnum stateEnum, Product product) {
         this.state = stateEnum.getState();
         this.stateInfo = stateEnum.getStateInfo();
         this.product = product;
     }
+
     // 成功的构造器
     public ProductExecution(ProductStateEnum stateEnum, List<Product> productList) {
         this.productList = productList;

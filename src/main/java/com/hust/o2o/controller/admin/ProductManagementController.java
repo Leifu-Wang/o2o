@@ -37,7 +37,7 @@ import java.util.Map;
  * @created 2019-01-08 16:19
  */
 @Controller
-@RequestMapping("/shopadmin")
+@RequestMapping("/shop")
 public class ProductManagementController {
     private Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
 
@@ -53,7 +53,6 @@ public class ProductManagementController {
     private static int MAX_IMG_COUNT = 6;
 
     /**
-     *
      * @param request
      * @return
      */
@@ -76,7 +75,8 @@ public class ProductManagementController {
             List<ImageHolder> productImgList = new ArrayList<>();
 
             MultipartHttpServletRequest multipartRequest;
-            CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+            CommonsMultipartResolver multipartResolver =
+                    new CommonsMultipartResolver(request.getSession().getServletContext());
 
             /**
              * 若请求中存在文件流，则取出相关的文件(包括缩略图和详情图)
@@ -88,11 +88,11 @@ public class ProductManagementController {
                 product.setShop(shop);
 
                 // 执行Service层提供的添加操作
-                ProductExecution productExecution = productService.addProduct(product,thumbnail, productImgList); // throws ProductOperationException
+                ProductExecution productExecution = productService.addProduct(product, thumbnail, productImgList); //
+                // throws ProductOperationException
                 if (productExecution.getState() == ProductStateEnum.SUCCESS.getState()) {
                     modelMap.put("success", true);
-                }
-                else {
+                } else {
                     modelMap.put("success", false);
                     modelMap.put("errMSg", productExecution.getStateInfo());
                 }
@@ -125,12 +125,11 @@ public class ProductManagementController {
         if (productId > -1) {
             Product product = productService.getProductById(productId);
             List<ProductCategory> productCategoryList =
-                    productCategoryService.queryProductCategory(product.getShop().getShopId());
+                    productCategoryService.getProductCategoryList(product.getShop().getShopId());
             modelMap.put("product", product);
             modelMap.put("productCategoryList", productCategoryList);
             modelMap.put("success", true);
-        }
-        else {
+        } else {
             modelMap.put("success", false);
             modelMap.put("errMsg", "empty productId");
         }
@@ -152,7 +151,7 @@ public class ProductManagementController {
         try {
             /*若请求中存在文件流，则取出相关的文件(包括缩略图和详情图)*/
             CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-            if(multipartResolver.isMultipart(request)) {
+            if (multipartResolver.isMultipart(request)) {
                 /*接受前端参数变量的初始化，包括商品、缩略图、详情图列表 实体类*/
                 List<ImageHolder> productImgList = new ArrayList<>();
                 ImageHolder thumbnail = handleImage(request, productImgList, multipartResolver);
@@ -165,9 +164,7 @@ public class ProductManagementController {
                 ProductExecution pe = productService.modifyProduct(product, thumbnail, productImgList);
                 if (pe.getState() == ProductStateEnum.SUCCESS.getState()) {
                     modelMap.put("success", true);
-                }
-                else
-                {
+                } else {
                     modelMap.put("success", false);
                     modelMap.put("errMsg", "商品修改失败: " + pe.getStateInfo());
                 }
@@ -196,16 +193,13 @@ public class ProductManagementController {
         long productCategoryId = -1;
         String productName = null;
         for (Cookie cookie : cookies) {
-            if(cookie.getName().equals("pageIndex")) {
+            if (cookie.getName().equals("pageIndex")) {
                 pageIndex = new Integer(cookie.getValue());
-            }
-            else if (cookie.getName().equals("pageSize")) {
+            } else if (cookie.getName().equals("pageSize")) {
                 pageSize = new Integer(cookie.getValue());
-            }
-            else if(cookie.getName().equals("productCategoryId")) {
+            } else if (cookie.getName().equals("productCategoryId")) {
                 productCategoryId = new Long(cookie.getValue());
-            }
-            else if (cookie.getName().equals("productName")) {
+            } else if (cookie.getName().equals("productName")) {
                 productName = cookie.getValue();
             }
         }
@@ -214,7 +208,7 @@ public class ProductManagementController {
         Shop shop = getShop(request);
         product.setShop(shop);
 
-        if(pageIndex > -1 && pageSize > -1 && shop != null && shop.getShopId() != null) {
+        if (pageIndex > -1 && pageSize > -1 && shop != null && shop.getShopId() != null) {
             ProductCategory productCategory = new ProductCategory();
             productCategory.setProductCategoryId(productCategoryId);
             product.setProductCategory(productCategory);
@@ -224,8 +218,7 @@ public class ProductManagementController {
             modelMap.put("productList", pe.getProductList());
             modelMap.put("count", pe.getCount());
             modelMap.put("success", true);
-        }
-        else {
+        } else {
             modelMap.put("success", false);
             modelMap.put("errMsg", "empty pageIndex or pageSize or shopId");
         }
@@ -251,6 +244,7 @@ public class ProductManagementController {
 
     /**
      * 从前端获取商品的 缩略图 和 详情图
+     *
      * @param request
      * @param productImgList
      * @param multipartResolver
@@ -281,8 +275,7 @@ public class ProductManagementController {
                 ImageHolder productImg = new ImageHolder(productImgFile.getOriginalFilename(),
                         productImgFile.getInputStream()); // throw IO exception
                 productImgList.add(productImg);
-            }
-            else {
+            } else {
                 /* 若取出的第i个详情图片文件流为空，终止循环 */
                 break;
             }

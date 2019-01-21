@@ -1,8 +1,5 @@
 package com.hust.o2o.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author: wang
  * @Desciption:
